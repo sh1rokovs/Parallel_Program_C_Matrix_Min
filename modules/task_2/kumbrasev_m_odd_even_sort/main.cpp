@@ -9,10 +9,10 @@ TEST(Parallel_Operations_MPI, Test_100) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 100;
-    long int * arr = gen_array(size);
+    int size = 100;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -22,12 +22,12 @@ TEST(Parallel_Operations_MPI, Test_100) {
             if (my_rank < comm_sz - 1) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
-        }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
@@ -35,14 +35,14 @@ TEST(Parallel_Operations_MPI, Test_100) {
     }
 }
 
-TEST(Parallel_Operations_MPI, Test_100) {
+TEST(Parallel_Operations_MPI, Test_456) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 100;
-    long int * arr = gen_array(size);
+    int size = 456;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -52,12 +52,12 @@ TEST(Parallel_Operations_MPI, Test_100) {
             if (my_rank < comm_sz - 1) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
-        }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
@@ -69,10 +69,10 @@ TEST(Parallel_Operations_MPI, Test_256) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 256;
-    long int * arr = gen_array(size);
+    int size = 256;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -83,11 +83,12 @@ TEST(Parallel_Operations_MPI, Test_256) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
         }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
@@ -99,10 +100,10 @@ TEST(Parallel_Operations_MPI, Test_25) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 25;
-    long int * arr = gen_array(size);
+    int size = 25;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -113,11 +114,12 @@ TEST(Parallel_Operations_MPI, Test_25) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
         }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
@@ -129,10 +131,10 @@ TEST(Parallel_Operations_MPI, Test_10) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 10;
-    long int * arr = gen_array(size);
+    int size = 10;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -142,12 +144,12 @@ TEST(Parallel_Operations_MPI, Test_10) {
             if (my_rank < comm_sz - 1) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
-        }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
@@ -159,10 +161,10 @@ TEST(Parallel_Operations_MPI, Test_1250) {
     int my_rank, comm_sz;
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    long int size = 1250;
-    long int * arr = gen_array(size);
+    int size = 1250;
+    int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    long int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
@@ -172,12 +174,12 @@ TEST(Parallel_Operations_MPI, Test_1250) {
             if (my_rank < comm_sz - 1) {
                 PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
             }
-        }
-        else if (my_rank > 0) {
+        } else { if (my_rank > 0) {
             PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
+            }
         }
     }
-    long int * final_arr = new long int[size];
+    int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
