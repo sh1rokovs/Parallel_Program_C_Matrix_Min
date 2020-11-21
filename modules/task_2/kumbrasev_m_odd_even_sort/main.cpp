@@ -15,7 +15,6 @@ TEST(Parallel_Operations_MPI, Test_100) {
     int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
-    delete[] arr;
     odd_even_sort(local_arr, local_size);
     for (int proc_itr = 1; proc_itr <= comm_sz; proc_itr++) {
         if ((my_rank + proc_itr) % 2 == 0) {
@@ -29,10 +28,11 @@ TEST(Parallel_Operations_MPI, Test_100) {
     }
     int * final_arr = new int[size];
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
-    delete[] final_arr;
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
     }
+    delete[] arr;
+    delete[] final_arr;
 }
 
 int main(int argc, char** argv) {
