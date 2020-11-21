@@ -12,7 +12,7 @@ TEST(Parallel_Operations_MPI, Test_100) {
     int size = 100;
     int * arr = gen_array(size);
     int local_size = size / comm_sz;
-    int * local_arr = new long int[local_size];
+    int * local_arr = new int[local_size];
     bubbleSort(arr, size);
     MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] arr;
