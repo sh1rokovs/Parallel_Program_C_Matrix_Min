@@ -9,7 +9,6 @@
 
 int gen_numbers(int range);
 int * gen_array(int size);
-
 void bubbleSort(int *arr, int size);
 void odd_even_sort(int * arr, int size);
 
