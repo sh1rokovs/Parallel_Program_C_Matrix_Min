@@ -31,7 +31,7 @@ TEST(Parallel_Operations_MPI, Test_100) {
     MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
     delete[] final_arr;
     if (my_rank == 0) {
-		ASSERT_EQ(arr, final_arr);
+        ASSERT_EQ(arr, final_arr);
     }
 }
 
