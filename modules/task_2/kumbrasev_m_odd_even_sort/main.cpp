@@ -5,16 +5,16 @@
 #include <algorithm>
 #include "./odd_even_sort.h"
 
-TEST(Parallel_Operations_MPI, Test_100) {
+TEST(Parallel_Operations_MPI, Test_1000) {
     int my_rank, comm_sz;
+    int size = 1000; 
+    std::vector<int> arr = create_vector(size);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int size = 100;
-    int * arr = gen_array(size);
-    int local_size = size / comm_sz;
-    int * local_arr = new int[local_size];
-    bubbleSort(arr, size);
-    MPI_Scatter(arr, local_size, MPI_LONG, local_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
+    int local_size = size / comm_sz; 
+    std::vector<int> local_arr(local_size);
+    bubbleSort(arr.data(), arr.size());
+    MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     odd_even_sort(local_arr, local_size);
     for (int proc_itr = 1; proc_itr <= comm_sz; proc_itr++) {
         if ((my_rank + proc_itr) % 2 == 0) {
@@ -26,13 +26,11 @@ TEST(Parallel_Operations_MPI, Test_100) {
             }
         }
     }
-    int * final_arr = new int[size];
-    MPI_Gather(local_arr, local_size, MPI_LONG, final_arr, local_size, MPI_LONG, 0, MPI_COMM_WORLD);
+    std::vector<int> final_arr(size);
+    MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
     }
-    delete[] arr;
-    delete[] final_arr;
 }
 
 int main(int argc, char** argv) {

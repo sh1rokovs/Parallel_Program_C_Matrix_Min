@@ -6,19 +6,15 @@
 #include <utility>
 #include "../../../modules/task_2/kumbrasev_m_odd_even_sort/odd_even_sort.h"
 
-int gen_numbers(int range) {
-    std::random_device random;
-    std::mt19937 generation(random());
-    std::uniform_int_distribution<int> uid(0, range);
-    return uid(generation);
-}
-
-int * gen_array(int size) {
-    int * temp_arr = new int[size];
+std::vector<int> create_vector(int size) {
+    std::vector<int> result(size);
+    std::random_device rd;
+    std::mt19937 mersenne(rd());
+    std::uniform_real_distribution<> urd(0, 1000);
     for (int i = 0; i < size; i++) {
-        temp_arr[i] = gen_numbers(size);
+        result[i] = static_cast<int>(urd(mersenne));
     }
-    return temp_arr;
+    return result;
 }
 
 void bubbleSort(int *arr, int size) {
@@ -33,7 +29,7 @@ void bubbleSort(int *arr, int size) {
     }
 }
 
-void odd_even_sort(int * arr, int size) {
+void odd_even_sort(std::vector<int>arr, int size) {
     int phase, itr;
 
     for (phase = 0; phase < size; phase++) {
@@ -43,7 +39,8 @@ void odd_even_sort(int * arr, int size) {
                     std::swap(arr[itr - 1], arr[itr]);
                 }
             }
-        } else {
+        }
+        else {
             for (itr = 1; itr < size - 1; itr += 2) {
                 if (arr[itr] > arr[itr + 1]) {
                     std::swap(arr[itr], arr[itr + 1]);
@@ -53,19 +50,21 @@ void odd_even_sort(int * arr, int size) {
     }
 }
 
-void PHASE(int SEND_RANK, int RCV_RANK, int * arr, int size, MPI_Comm COMM) {
+void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm COMM) {
     int current_rank;
     MPI_Comm_rank(COMM, &current_rank);
 
-    int * temp_arr = new int[size];
+    std::vector<int> temp_arr(size);
 
-    int * aux_arr = new int[size * 2];
+    std::vector<int> aux_arr(size * 2);
+
 
     if (current_rank == SEND_RANK) {
-        MPI_Send(arr, size, MPI_LONG, RCV_RANK, 0, COMM);
-        MPI_Recv(arr, size, MPI_LONG, RCV_RANK, 1, COMM, MPI_STATUS_IGNORE);
-    } else {
-        MPI_Recv(temp_arr, size, MPI_LONG, SEND_RANK, 0, COMM, MPI_STATUS_IGNORE);
+        MPI_Send(arr.data(), size, MPI_INT, RCV_RANK, 0, COMM);
+        MPI_Recv(arr.data(), size, MPI_INT, RCV_RANK, 1, COMM, MPI_STATUS_IGNORE);
+    }
+    else {
+        MPI_Recv(temp_arr.data(), size, MPI_INT, SEND_RANK, 0, COMM, MPI_STATUS_IGNORE);
 
         int * first = &aux_arr[0];
         int * last = &aux_arr[size * 2];
@@ -75,16 +74,19 @@ void PHASE(int SEND_RANK, int RCV_RANK, int * arr, int size, MPI_Comm COMM) {
 
         while (first != last) {
             if (runner_1 == &arr[size]) {
-                while (runner_2 != &temp_arr[size]) {
+                while (runner_2 != &temp_arr[size]) { // case 1
                     *first++ = *runner_2++;
                 }
-            } else if (runner_2 == &temp_arr[size]) {
+            }
+            else if (runner_2 == &temp_arr[size]) { // case 2
                 while (runner_1 != &arr[size]) {
                     *first++ = *runner_1++;
                 }
-            } else if (*runner_1 < *runner_2) {
+            }
+            else if (*runner_1 < *runner_2) {
                 *first++ = *runner_1++;
-            } else {
+            }
+            else {
                 *first++ = *runner_2++;
             }
         }
@@ -96,10 +98,6 @@ void PHASE(int SEND_RANK, int RCV_RANK, int * arr, int size, MPI_Comm COMM) {
             itr++;
         }
 
-        delete[] aux_arr;
-
-        MPI_Send(temp_arr, size, MPI_LONG, SEND_RANK, 1, COMM);
-
-        delete[] temp_arr;
+        MPI_Send(temp_arr.data(), size, MPI_INT, SEND_RANK, 1, COMM);
     }
 }
