@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <random>
 #include <utility>
+#include <vector>
 #include "../../../modules/task_2/kumbrasev_m_odd_even_sort/odd_even_sort.h"
 
 std::vector<int> create_vector(int size) {
