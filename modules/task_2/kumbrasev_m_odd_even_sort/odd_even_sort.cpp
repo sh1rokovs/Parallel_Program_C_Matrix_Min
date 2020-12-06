@@ -39,9 +39,7 @@ void odd_even_sort(std::vector<int>arr, int size) {
                     std::swap(arr[itr - 1], arr[itr]);
                 }
             }
-        }
-        else {
-            for (itr = 1; itr < size - 1; itr += 2) {
+        } else { for (itr = 1; itr < size - 1; itr += 2) {
                 if (arr[itr] > arr[itr + 1]) {
                     std::swap(arr[itr], arr[itr + 1]);
                 }
@@ -62,8 +60,7 @@ void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm
     if (current_rank == SEND_RANK) {
         MPI_Send(arr.data(), size, MPI_INT, RCV_RANK, 0, COMM);
         MPI_Recv(arr.data(), size, MPI_INT, RCV_RANK, 1, COMM, MPI_STATUS_IGNORE);
-    }
-    else {
+    } else {
         MPI_Recv(temp_arr.data(), size, MPI_INT, SEND_RANK, 0, COMM, MPI_STATUS_IGNORE);
 
         int * first = &aux_arr[0];
@@ -74,19 +71,18 @@ void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm
 
         while (first != last) {
             if (runner_1 == &arr[size]) {
-                while (runner_2 != &temp_arr[size]) { // case 1
+                while (runner_2 != &temp_arr[size]) {
                     *first++ = *runner_2++;
                 }
-            }
-            else if (runner_2 == &temp_arr[size]) { // case 2
-                while (runner_1 != &arr[size]) {
+            } else { if (runner_2 == &temp_arr[size]) {
+                    while (runner_1 != &arr[size]) {
                     *first++ = *runner_1++;
+                    }
                 }
-            }
-            else if (*runner_1 < *runner_2) {
+            } else { if (*runner_1 < *runner_2) {
                 *first++ = *runner_1++;
-            }
-            else {
+                }
+            } else {
                 *first++ = *runner_2++;
             }
         }

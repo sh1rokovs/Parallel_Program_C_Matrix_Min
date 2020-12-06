@@ -7,11 +7,11 @@
 
 TEST(Parallel_Operations_MPI, Test_1000) {
     int my_rank, comm_sz;
-    int size = 1000; 
+    int size = 1000;
     std::vector<int> arr = create_vector(size);
     MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz; 
+    int local_size = size / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
