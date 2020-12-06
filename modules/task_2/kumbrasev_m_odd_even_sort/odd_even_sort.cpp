@@ -3,7 +3,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <random>
-#include <utility>
 #include <vector>
 #include "../../../modules/task_2/kumbrasev_m_odd_even_sort/odd_even_sort.h"
 
@@ -75,15 +74,16 @@ void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm
                 while (runner_2 != &temp_arr[size]) {
                     *first++ = *runner_2++;
                 }
-            } else { if (runner_2 == &temp_arr[size]) {
-                    while (runner_1 != &arr[size]) {
+            }
+            else if (runner_2 == &temp_arr[size]) {
+                while (runner_1 != &arr[size]) {
                     *first++ = *runner_1++;
-                    }
                 }
-            } else { if (*runner_1 < *runner_2) {
+            }
+            else if (*runner_1 < *runner_2) {
                 *first++ = *runner_1++;
-                }
-            } else {
+            }
+            else {
                 *first++ = *runner_2++;
             }
         }
