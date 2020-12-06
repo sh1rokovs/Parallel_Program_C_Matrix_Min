@@ -89,34 +89,6 @@ TEST(Parallel_Operations_MPI, Test_250) {
     }
 }
 
-TEST(Parallel_Operations_MPI, Test_777) {
-    int my_rank, comm_sz;
-    int size = 777;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
-    std::vector<int> local_arr(local_size);
-    bubbleSort(arr.data(), arr.size());
-    MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
-    odd_even_sort(local_arr, local_size);
-    for (int proc_itr = 1; proc_itr <= comm_sz; proc_itr++) {
-        if ((my_rank + proc_itr) % 2 == 0) {
-            if (my_rank < comm_sz - 1) {
-                PHASE(my_rank, my_rank + 1, local_arr, local_size, MPI_COMM_WORLD);
-            }
-        } else { if (my_rank > 0) {
-            PHASE(my_rank - 1, my_rank, local_arr, local_size, MPI_COMM_WORLD);
-            }
-        }
-    }
-    std::vector<int> final_arr(size);
-    MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
-    if (my_rank == 0) {
-        ASSERT_EQ(arr, final_arr);
-    }
-}
-
 TEST(Parallel_Operations_MPI, Test_456) {
     int my_rank, comm_sz;
     int size = 456;
