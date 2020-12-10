@@ -173,7 +173,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
     std::vector<int> global_closest_verts_in(procNum);
     std::vector<int> global_closest_verts_out(procNum);
     std::vector<double>::iterator result;
-    int index;
     int local_closest_vert_in, local_closest_vert_out;
     bool done = false;
     int result_in, result_out;
