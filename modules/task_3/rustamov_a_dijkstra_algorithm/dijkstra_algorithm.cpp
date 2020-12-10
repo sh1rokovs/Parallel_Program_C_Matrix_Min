@@ -104,7 +104,6 @@ Matrix SequentialDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
     Matrix distance_to_verex(verts);
     std::fill(distance_to_verex.begin(), distance_to_verex.end(), inf);
     distance_to_verex[source_vertex] = 0.0;
-    bool done = false;
     int closest_vert_in, closest_vert_out;
     double shortest_path;
     while (true) {
@@ -177,8 +176,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
     int index;
     int local_closest_vert_in, local_closest_vert_out;
     bool done = false;
-    double time_send_sum = 0.0;
-
     int result_in, result_out;
     double result_path;
     while (true) {
@@ -202,7 +199,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
                 }
             }
         }
-        double time_send_start = MPI_Wtime();
         int curr_proc;
         // Передать найденные грани
         if (procRank != 0) {
@@ -243,8 +239,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
             result_in = local_closest_vert_in;
             result_out = local_closest_vert_out;
         }
-        double time_send_end = MPI_Wtime();
-        time_send_sum += time_send_end - time_send_start;
         // Добавить минимальную грань к дереву (если она есть)
         if (procRank == 0) {
             distance_to_verex[result_out] = distance_to_verex[result_in] + result_path;

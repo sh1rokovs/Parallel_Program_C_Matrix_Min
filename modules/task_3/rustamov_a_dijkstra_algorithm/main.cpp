@@ -77,7 +77,6 @@ TEST(Dijkstra_Algorithm, 5_9_Unoriented_Source_0) {
     Matrix graph = RandomGraph(verts, edges, is_oriented);
     Matrix spt = ParallelDijkstraAlgorithm(graph, verts, 0);
     if (procRank == 0) {
-        int idx = 0;
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         for (int pos = 0; pos < verts * verts; pos++) {
             if ((spt[pos] != inf) || (seq_spt[pos] != inf))
@@ -96,7 +95,6 @@ TEST(Dijkstra_Algorithm, 5_9_Oriented_Source_0) {
     Matrix graph = RandomGraph(verts, edges, is_oriented);
     Matrix spt = ParallelDijkstraAlgorithm(graph, verts, 0);
     if (procRank == 0) {
-        int idx = 0;
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         for (int pos = 0; pos < verts * verts; pos++) {
             if ((spt[pos] != inf) || (seq_spt[pos] != inf))
@@ -116,7 +114,6 @@ TEST(Dijkstra_Algorithm, 5_9_Unoriented_Source_1) {
     Matrix graph = RandomGraph(verts, edges, is_oriented);
     Matrix spt = ParallelDijkstraAlgorithm(graph, verts, 1);
     if (procRank == 0) {
-        int idx = 0;
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 1);
         for (int pos = 0; pos < verts * verts; pos++) {
             if ((spt[pos] != inf) || (seq_spt[pos] != inf))
@@ -135,7 +132,6 @@ TEST(Dijkstra_Algorithm, 5_9_Oriented_Source_3) {
     Matrix graph = RandomGraph(verts, edges, is_oriented);
     Matrix spt = ParallelDijkstraAlgorithm(graph, verts, 3);
     if (procRank == 0) {
-        int idx = 0;
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 3);
         for (int pos = 0; pos < verts * verts; pos++) {
             if ((spt[pos] != inf) || (seq_spt[pos] != inf))
@@ -159,7 +155,6 @@ TEST(Dijkstra_Algorithm, 10_30_Unoriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -186,7 +181,6 @@ TEST(Dijkstra_Algorithm, 100_400_Unoriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -213,7 +207,6 @@ TEST(Dijkstra_Algorithm, 200_400_Unoriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -240,7 +233,6 @@ TEST(Dijkstra_Algorithm, 500_500_Unoriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -267,7 +259,6 @@ TEST(Dijkstra_Algorithm, 500_70000_Unoriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -294,7 +285,6 @@ TEST(Dijkstra_Algorithm, 500_220000_Oriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
@@ -321,7 +311,6 @@ TEST(Dijkstra_Algorithm, 1000_998000_Oriented_Source_0) {
         std::cout << "PAR: " << time_end_par - time_start_par << std::endl;
     }
     if (procRank == 0) {
-        int idx = 0;
         double time_start_seq = MPI_Wtime();
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         double time_end_seq = MPI_Wtime();
