@@ -335,7 +335,6 @@ TEST(Dijkstra_Algorithm, 1000_998000_Oriented_Source_0) {
     }
 }
 
-
 int main(int argc, char* argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     MPI_Init(&argc, &argv);
