@@ -37,8 +37,9 @@ TEST(Dijkstra_Algorithm, Correct_Answer_Unoriented_5_Seq) {
                         inf, inf, inf, inf, inf,
                         inf, inf, inf, inf, inf };
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (exspt[pos] != inf))
+            if ((spt[pos] != inf) || (exspt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], exspt[pos], EPSILON);
+            }
         }
     }
 }
@@ -61,8 +62,9 @@ TEST(Dijkstra_Algorithm, Correct_Answer_Unoriented_5_Par) {
                         inf, inf, inf, inf, inf,
                         inf, inf, inf, inf, inf };
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (exspt[pos] != inf))
+            if ((spt[pos] != inf) || (exspt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], exspt[pos], EPSILON);
+            }
         }
     }
 }
