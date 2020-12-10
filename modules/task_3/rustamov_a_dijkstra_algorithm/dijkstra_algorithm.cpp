@@ -170,9 +170,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
     }
     double local_shortest_path;
     Matrix global_shortest_paths(procNum);
-    std::vector<int> global_closest_verts_in(procNum);
-    std::vector<int> global_closest_verts_out(procNum);
-    std::vector<double>::iterator result;
     int local_closest_vert_in, local_closest_vert_out;
     bool done = false;
     int result_in, result_out;
@@ -205,8 +202,6 @@ Matrix ParallelDijkstraAlgorithm(Matrix graph, int verts, int source_vertex) {
             MPI_Bcast(&done, 1, MPI_C_BOOL, 0, MPI_COMM_WORLD);
         } else {
             global_shortest_paths[0] = local_shortest_path;
-            global_closest_verts_in[0] = local_closest_vert_in;
-            global_closest_verts_out[0] = local_closest_vert_out;
             for (int proc = 1; proc < procNum; proc++) {
                 MPI_Recv(global_shortest_paths.data() + proc, 1, MPI_DOUBLE, proc, 0, MPI_COMM_WORLD, &status);
             }
