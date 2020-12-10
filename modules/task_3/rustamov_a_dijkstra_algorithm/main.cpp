@@ -79,8 +79,9 @@ TEST(Dijkstra_Algorithm, 5_9_Unoriented_Source_0) {
     if (procRank == 0) {
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -97,8 +98,9 @@ TEST(Dijkstra_Algorithm, 5_9_Oriented_Source_0) {
     if (procRank == 0) {
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 0);
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -116,8 +118,9 @@ TEST(Dijkstra_Algorithm, 5_9_Unoriented_Source_1) {
     if (procRank == 0) {
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 1);
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -134,8 +137,9 @@ TEST(Dijkstra_Algorithm, 5_9_Oriented_Source_3) {
     if (procRank == 0) {
         Matrix seq_spt = SequentialDijkstraAlgorithm(graph, verts, 3);
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -160,8 +164,9 @@ TEST(Dijkstra_Algorithm, 10_30_Unoriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -186,8 +191,9 @@ TEST(Dijkstra_Algorithm, 100_400_Unoriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -212,8 +218,9 @@ TEST(Dijkstra_Algorithm, 200_400_Unoriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -238,8 +245,9 @@ TEST(Dijkstra_Algorithm, 500_500_Unoriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -264,8 +272,9 @@ TEST(Dijkstra_Algorithm, 500_70000_Unoriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -290,8 +299,9 @@ TEST(Dijkstra_Algorithm, 500_220000_Oriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
@@ -316,8 +326,9 @@ TEST(Dijkstra_Algorithm, 1000_998000_Oriented_Source_0) {
         double time_end_seq = MPI_Wtime();
         std::cout << "SEQ: " << time_end_seq - time_start_seq << std::endl;
         for (int pos = 0; pos < verts * verts; pos++) {
-            if ((spt[pos] != inf) || (seq_spt[pos] != inf))
+            if ((spt[pos] != inf) || (seq_spt[pos] != inf)) {
                 ASSERT_NEAR(spt[pos], seq_spt[pos], EPSILON);
+            }
         }
     }
 }
