@@ -155,7 +155,7 @@ TEST(Gauss_Vertical, 6x6x6) {
 TEST(Gauss_Vertical, 20x20x20) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
-    int rows = 20, cols = 20, vecSize = 20;
+    int rows = 20, vecSize = 20, cols = 20;
     Matrix matrix;
     Matrix vec;
     Matrix res1, res2;

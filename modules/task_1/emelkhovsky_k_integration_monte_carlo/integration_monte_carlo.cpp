@@ -14,21 +14,28 @@ int funcF(int x) {
     return x + 1;
 }
 
+int funcSin(int x) {
+    return sin(x);
+}
 
-double EasyFunc(int N, int a, int b) {
+
+double EasyFunc(int N, int a, int b, int fl) {
     double y = 0;
     std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(time(0)));
     for (int i = 1; i < N; i++) {
         int dot = a + gen() % (b - a);
-        y += funcF(dot);
+        if (fl == 0)
+            y += funcF(dot);
+        else
+            y += funcSin(dot);
     }
     double dop = static_cast<double>(b - a) / N;
     return (dop * y);
 }
 
 
-double ParallelFunc(int N, int a, int b) {
+double ParallelFunc(int N, int a, int b, int fl) {
     if (b < a)
         throw "[Oops...] b must be bigger than a!";
     int size, rank;
@@ -50,7 +57,10 @@ double ParallelFunc(int N, int a, int b) {
     gen.seed(static_cast<unsigned int>(time(0)));
     for (int i = 1; i < count_dot; i++) {
         dot = a + gen() % (b - a);
-        y += funcF(dot);
+        if (fl == 0)
+            y += funcF(dot);
+        else
+            y += funcSin(dot);
     }
     int global_sum;
     MPI_Reduce(&y, &global_sum, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
