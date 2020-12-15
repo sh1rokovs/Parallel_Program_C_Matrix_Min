@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-#include "./matrix.h"
+#include "./multiplication_matrix.h"
 
 void test(const int& t_cols, const int& t_rows, const int& t_b_cols) {
     int rank;
