@@ -7,6 +7,7 @@
 #define ERR_INCORRECT_SIZE -2
 
 class SparseMatrix {
+
 public:
     std::vector<double> m_val;
     std::vector<int> m_col_ind;

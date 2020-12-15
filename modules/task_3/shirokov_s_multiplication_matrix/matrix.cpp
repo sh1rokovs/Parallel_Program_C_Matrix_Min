@@ -37,8 +37,7 @@ const std::vector<double> SparseMatrix::makeVector() const {
         for (auto col = 0; col < m_columns; col++) {
             if (m_row_ptr.at(row + 1) - m_row_ptr.at(row) == 0) {
                 result.push_back(0.0);
-            }
-            else {
+            } else {
                 bool pushed = false;
                 for (auto i = m_row_ptr.at(row); i <= m_row_ptr.at(row + 1) - 1; i++) {
                     if (m_col_ind.at(i) == col) {
@@ -61,8 +60,7 @@ const std::vector<double> SparseMatrix::makeColumn(const int& t_col) {
     for (auto row = 0; row < m_rows; row++) {
         if (m_row_ptr.at(row + 1) - m_row_ptr.at(row) == 0) {
             result.push_back(0.0);
-        }
-        else {
+        } else {
             bool pushed = false;
             for (auto i = m_row_ptr.at(row); i <= m_row_ptr.at(row + 1) - 1; i++) {
                 if (m_col_ind.at(i) == t_col) {
@@ -134,8 +132,7 @@ std::vector<double> multiply(SparseMatrix* A, SparseMatrix* B) {
     if (A->m_rows < comm_size) {
         if (rank == 0) {
             return *A * *B;
-        }
-        else {
+        } else {
             return std::vector<double>();
         }
     }
@@ -201,8 +198,7 @@ std::vector<double> multiply(SparseMatrix* A, SparseMatrix* B) {
         MPI_Gather(&local_result[0], rows_per_proc * B->m_columns, MPI_DOUBLE,
             &global_result[0], rows_per_proc * B->m_columns, MPI_DOUBLE, 0,
             MPI_COMM_WORLD);
-    }
-    else {
+    } else {
         MPI_Gather(&local_result[0], rows_per_proc * B->m_columns, MPI_DOUBLE,
             MPI_IN_PLACE, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     }
