@@ -7,40 +7,40 @@
 #define ERR_INCORRECT_SIZE -2
 
 class SparseMatrix {
-    public:
-        std::vector<double> m_val;
-        std::vector<int> m_col_ind;
-        std::vector<int> m_row_ptr;
-        int m_columns, m_rows, m_non_zero;
+ public:
+    std::vector<double> m_val;
+    std::vector<int> m_col_ind;
+    std::vector<int> m_row_ptr;
+    int m_columns, m_rows, m_non_zero;
 
-        SparseMatrix() : m_columns(0), m_rows(0), m_non_zero(0) {}
+    SparseMatrix() : m_columns(0), m_rows(0), m_non_zero(0) {}
 
-        SparseMatrix(const std::vector<double>& t_val,
-            const std::vector<int>& t_col_ind,
-            const std::vector<int>& t_row_ptr, const int& t_columns,
-            const int& t_rows)
-            : m_val(t_val),
-            m_col_ind(t_col_ind),
-            m_row_ptr(t_row_ptr),
-            m_columns(t_columns),
-            m_rows(t_rows),
-            m_non_zero(t_val.size()) {}
+    SparseMatrix(const std::vector<double>& t_val,
+        const std::vector<int>& t_col_ind,
+        const std::vector<int>& t_row_ptr, const int& t_columns,
+        const int& t_rows)
+        : m_val(t_val),
+        m_col_ind(t_col_ind),
+        m_row_ptr(t_row_ptr),
+        m_columns(t_columns),
+        m_rows(t_rows),
+        m_non_zero(t_val.size()) {}
 
-        SparseMatrix(const int& t_columns, const int& t_rows)
-            : m_columns(t_columns), m_rows(t_rows) {
-            m_row_ptr.resize(t_rows + 1);
-        }
+    SparseMatrix(const int& t_columns, const int& t_rows)
+        : m_columns(t_columns), m_rows(t_rows) {
+        m_row_ptr.resize(t_rows + 1);
+    }
 
-        SparseMatrix(const std::vector<double>& A, const int& t_columns,
-            const int& t_rows);
+    SparseMatrix(const std::vector<double>& A, const int& t_columns,
+        const int& t_rows);
 
-        const std::vector<double> makeVector() const;
-        const std::vector<double> makeColumn(const int& t_col);
+    const std::vector<double> makeVector() const;
+    const std::vector<double> makeColumn(const int& t_col);
 
-        friend const std::vector<double> operator*(const SparseMatrix& A,
-            const SparseMatrix& B);
-        friend const std::vector<double> operator*(const SparseMatrix& A,
-            const std::vector<double>& B);
+    friend const std::vector<double> operator*(const SparseMatrix& A,
+        const SparseMatrix& B);
+    friend const std::vector<double> operator*(const SparseMatrix& A,
+        const std::vector<double>& B);
 };
 
 
