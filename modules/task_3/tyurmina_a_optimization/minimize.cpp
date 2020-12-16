@@ -1,4 +1,4 @@
-﻿  // Copyright 2020 Tyurmina Alexandra
+﻿// Copyright 2020 Tyurmina Alexandra
 
 #include <mpi.h>
 #include <utility>
@@ -29,7 +29,7 @@ double GlobalOpt::get_m(double r, double M) {
 }
 
 GlobalOpt::GlobalOpt(double _a1, double _b1, std::function<double(double*)> _test_func,
-                     double _eps) {
+    double _eps) {
     a1 = _a1; b1 = _b1;
     test_func = _test_func;
     epsilon = _eps;
@@ -39,7 +39,7 @@ double GlobalOpt::get_R(int i, double m, const std::vector<double>& x) {
     double diff = get_func_val(x[i]) - get_func_val(x[i - 1]);
     double summ = get_func_val(x[i]) + get_func_val(x[i - 1]);
     double koef = m * (x[i] - x[i - 1]);
-    double val  = std::pow(diff, 2) / koef - 2 * summ + koef;
+    double val = std::pow(diff, 2) / koef - 2 * summ + koef;
 
     return val;
 }
