@@ -21,7 +21,7 @@ TEST(global_GlobalOpt, TEST0_seq_min) {
     ASSERT_NEAR(result, correct_result, 1e-3);
 }
 
-TEST(global_GlobalOpt, TEST1_par_min) {
+/* TEST(global_GlobalOpt, TEST1_par_min) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     GlobalOpt opt(0.3, 2.2, f_test1, 1e-5);
@@ -29,7 +29,7 @@ TEST(global_GlobalOpt, TEST1_par_min) {
     double result = opt.GlobalSearchPar(800);
     double correct_result = 1.05228;
     if (rank == 0) ASSERT_NEAR(result, correct_result, 1e-4);
-}
+} */
 
 TEST(global_GlobalOpt, TEST2_parallel_min_for_f) {
     int rank;
