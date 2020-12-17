@@ -121,9 +121,9 @@ double GlobalOpt::GlobalSearchPar(int iterationsTops) {
         if (a != b) {
             double temp = 0;
             GlobalOpt opt(a, b, test_func, epsilon);
-            double local = opt.GlobalSearchSeq(iterationsTops);
-            double r0 = result[0];
-            MPI_Gather(&local, 1, MPI_DOUBLE, &r0, 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+            double* local = new double[prNum];
+            *local = opt.GlobalSearchSeq(iterationsTops);
+            MPI_Gather(&local[0], 1, MPI_DOUBLE, &result[0], 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
             double root = get_func_val(result[0]);
             if (prRank == 0) {
