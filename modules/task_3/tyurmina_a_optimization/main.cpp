@@ -66,12 +66,13 @@ TEST(global_GlobalOpt, TEST2_parallel_min_for_f) {
 
 TEST(global_GlobalOpt, TEST3_a_greater_then_b_par) {
     GlobalOpt opt(2.2, 0, f_test1, 1e-5);
-    double result = 0;
-    EXPECT_ANY_THROW(result = opt.GlobalSearchPar(800));
+    //double result = 0;
+    EXPECT_ANY_THROW(opt.GlobalSearchPar(800));
 }
 
 TEST(global_GlobalOpt, TEST4_a_greater_then_b_seq) {
     GlobalOpt opt(2.2, 0, f_test1, 1e-5);
+<<<<<<< HEAD
     double result = 0;
     EXPECT_ANY_THROW(result = opt.GlobalSearchSeq(800));
 =======
@@ -95,6 +96,10 @@ TEST(global_GlobalOpt, TEST4_a_greater_then_b_seq) {
 	std::cout << result << std::endl;
 	EXPECT_ANY_THROW(result = opt.GlobalSearchSeq(800));
 >>>>>>> 3ef5659 (fix new)
+=======
+    //double result = 0;
+    EXPECT_ANY_THROW(opt.GlobalSearchSeq(800));
+>>>>>>> ac8d69d (test3)
 }
 
 int main(int argc, char** argv) {
