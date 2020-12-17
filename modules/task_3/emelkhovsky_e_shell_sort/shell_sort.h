@@ -8,5 +8,4 @@
 std::vector<int> compareResults(std::vector<int> list);
 std::vector<int> shell_sort(std::vector<int> list);
 
-
 #endif  // MODULES_TASK_3_EMELKHOVSKY_E_SHELL_SORT_SHELL_SORT_H_

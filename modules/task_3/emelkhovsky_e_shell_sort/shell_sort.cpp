@@ -32,7 +32,6 @@ std::vector<int> shell_sort(std::vector<int> list) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     MPI_Status status;
 
-
     int len = list.size();
     int part = len;
     int lenin, count_of_parts, count_of_processes, count, count_2;

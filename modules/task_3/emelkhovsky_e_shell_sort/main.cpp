@@ -38,7 +38,7 @@ TEST(shell_sort, Test_3) {
     }
 }
 
-TEST(shell_sort, Test_4) {
+TEST(shell_sort, Test_44) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     std::vector<int> list = {1, -10, 0, 123};
