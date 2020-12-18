@@ -47,7 +47,6 @@ std::vector<double> filter_seq(std::vector<double> input_image, int w, int h) {
 }
 
 std::vector<double> filter_par(std::vector<double> input_image, int w, int h) {
-
     int p_size, p_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &p_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
