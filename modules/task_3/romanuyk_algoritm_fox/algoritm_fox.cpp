@@ -81,7 +81,10 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double> A, const st
     createGrid(&grid, procrank);
 
     int BlockSize;
-    BlockSize = size / grid.GridSize;
+    if (procrank == 0) {
+        BlockSize = size / grid.GridSize;
+    }
+    MPI_Bcast(&BlockSize, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     MPI_Datatype matrixBlock;
     MPI_Type_vector(BlockSize, BlockSize, grid.GridSize * BlockSize, MPI_DOUBLE, &matrixBlock);
