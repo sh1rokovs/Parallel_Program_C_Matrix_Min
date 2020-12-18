@@ -54,7 +54,6 @@ std::vector<double> filter_par(std::vector<double> input_image, int w, int h) {
     int n = w * h;
 
     MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    
     MPI_Bcast(&w, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(&h, 1, MPI_INT, 0, MPI_COMM_WORLD);
     int* array_counts = new int[p_size];
