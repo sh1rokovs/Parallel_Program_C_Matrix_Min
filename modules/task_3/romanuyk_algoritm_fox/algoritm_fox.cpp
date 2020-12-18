@@ -153,7 +153,7 @@ bool assertMatrix(const std::vector<double> A, const std::vector<double> B) {
     if (A.size() != B.size())
         throw "Different size";
     for (size_t i = 0; i < A.size(); i++) {
-        if ((std::fabs(A[i] - B[i]) >= std::numeric_limits<double>::epsilon() * 100000000.0))
+        if ((std::fabs(A[i] - B[i]) >= std::numeric_limits<double>::epsilon() * 1000000000.0))
             return false;
     }
     return true;
