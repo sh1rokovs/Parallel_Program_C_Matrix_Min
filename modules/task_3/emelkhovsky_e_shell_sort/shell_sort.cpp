@@ -15,7 +15,6 @@ std::vector<int> compareResults(std::vector<int> list) {
             int tmp = list[i - j + 1];
             list[i - j + 1] = list[i - j];
             list[i - j] = tmp;
-
             j++;
         }
     }
