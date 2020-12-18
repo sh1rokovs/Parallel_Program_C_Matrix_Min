@@ -34,28 +34,28 @@ std::vector<double> SequentinalMultiMatrix(std::vector<double> A, std::vector<do
 }
 
 void createGrid(Grid* grid, const int& procrank) {
-    int GridCoords[2];
-    int DimSize[2];
-    int Periodic[2];
-    int Subdims[2];
+    std::vector<int> GridCoords(2, 0);
+    std::vector<int> DimSize(2, 0);
+    std::vector<int> Periodic(2, 0);
+    std::vector<int> Subdims(2, 0);
     DimSize[0] = grid->GridSize;
     DimSize[1] = grid->GridSize;
     Periodic[0] = 0;
     Periodic[1] = 0;
 
-    MPI_Cart_create(MPI_COMM_WORLD, 2, DimSize, Periodic, 0, &grid->GridComm);
+    MPI_Cart_create(MPI_COMM_WORLD, 2, DimSize.data(), Periodic.data(), 0, &grid->GridComm);
 
-    MPI_Cart_coords(grid->GridComm, procrank, 2, GridCoords);
+    MPI_Cart_coords(grid->GridComm, procrank, 2, GridCoords.data());
     grid->row = GridCoords[0];
     grid->col = GridCoords[1];
 
     Subdims[0] = 0;
     Subdims[1] = 1;
-    MPI_Cart_sub(grid->GridComm, Subdims, &grid->RowComm);
+    MPI_Cart_sub(grid->GridComm, Subdims.data(), &grid->RowComm);
 
     Subdims[0] = 1;
     Subdims[1] = 0;
-    MPI_Cart_sub(grid->GridComm, Subdims, &grid->ColComm);
+    MPI_Cart_sub(grid->GridComm, Subdims.data(), &grid->ColComm);
 }
 
 void MultiplyMatrixforParallel(const std::vector<double> A, const std::vector<double> matrixB,
