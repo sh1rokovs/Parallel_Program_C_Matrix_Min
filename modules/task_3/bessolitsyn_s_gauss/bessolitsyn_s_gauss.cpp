@@ -109,7 +109,7 @@ std::vector<double> filter_par(std::vector<double> input_image, int w, int h) {
             for (int j = 0; j < w; j++) {
                 res[local_image_size + i * local_image_size + j] =
                 input_image[local_image_size + i * local_image_size +j];
-                if (local_image_size + i  * local_image_size + j + w < res.size())
+                if (local_image_size + i  * local_image_size + j + w < static_cast<int>(res.size))
                     res[local_image_size + i  * local_image_size + j + w] =
                     input_image[local_image_size + i  * local_image_size + j + w];
                 res[local_image_size + i  * local_image_size + j - w] =
