@@ -50,7 +50,6 @@ std::vector<double> genMatrix(int size) {
         }
 
     int max = 0;
-
     for (int i = 0; i < size; i++)
         for (int j = 0; j < size; j++) {
             if (arr[i*size + j] > max) max = arr[i*size + j];
