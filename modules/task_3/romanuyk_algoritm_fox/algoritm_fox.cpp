@@ -140,10 +140,10 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double> A, const st
         }
         for (int i = 1; i < procnum; i++) {
             MPI_Recv(result.data() + (i / grid.GridSize) * size * BlockSize + BlockSize * (i % grid.GridSize),
-                1, matrixBlock, i, 2, MPI_COMM_WORLD, &status);
+                1, matrixBlock, i, 3, MPI_COMM_WORLD, &status);
         }
     } else {
-        MPI_Send(Cblock.data(), BlockSize * BlockSize, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD);
+        MPI_Send(Cblock.data(), BlockSize * BlockSize, MPI_DOUBLE, 0, 3, MPI_COMM_WORLD);
     }
     MPI_Type_free(&matrixBlock);
     return result;
