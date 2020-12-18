@@ -47,7 +47,6 @@ std::vector<double> filter_seq(std::vector<double> input_image, int w, int h) {
 }
 
 std::vector<double> filter_par(std::vector<double> input_image, int w, int h) {
-    double t = MPI_Wtime();
 
     int p_size, p_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &p_size);
@@ -108,7 +107,7 @@ std::vector<double> filter_par(std::vector<double> input_image, int w, int h) {
 
     if (p_size != 1 && p_rank == 0) {
         for (int i = 0; i < p_size - 1; i++) {
-            for (size_t j = 0; j < w; j++) {
+            for (int j = 0; j < w; j++) {
                 res[local_image_size + i * local_image_size + j] =
                 input_image[local_image_size + i * local_image_size +j];
                 if (local_image_size + i  * local_image_size + j + w < res.size())
