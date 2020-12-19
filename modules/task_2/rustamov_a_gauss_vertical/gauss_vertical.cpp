@@ -148,6 +148,7 @@ Matrix ParallelGauss(const Matrix& matrix, int rows, int cols,
         }
     }
 
+
     int root;
     int max_i;
     // Прямой ход
