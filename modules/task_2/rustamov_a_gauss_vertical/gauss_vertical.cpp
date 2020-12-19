@@ -156,7 +156,7 @@ Matrix ParallelGauss(const Matrix& matrix, int rows, int cols,
             // Найти максимум по модулю в столбце
             double max = 0.0;
             max_i = 0;
-al_col < rows; local_col++) {
+            for (int local_col = 0; local_col < rows; local_col++) {
                 if ((fabs(local_matrix[(current_col / procNum) * rows + local_col]) >= fabs(max))&&
                     (was_pivot[local_col] == -1)) {
                     max = local_matrix[(current_col / procNum) * rows + local_col];
