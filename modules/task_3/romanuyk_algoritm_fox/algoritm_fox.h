@@ -10,8 +10,8 @@ std::vector<double> SequentinalMultiMatrix(std::vector<double> A, std::vector<do
 bool assertMatrix(const std::vector<double> A, const std::vector<double> B);
 
 void createGrid(int GridSize, int* GridCoords, int procrank);
-void MultiplyMatrixforParallel(const std::vector<double> A, const std::vector<double> matrixB,
-    double* matrixC, int size);
+void MultiplyMatrixforParallel(double* A, double* B,
+    double* C, int BlockSize);
 
 std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const std::vector<double>& B, int size);
 

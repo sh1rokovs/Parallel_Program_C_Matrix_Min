@@ -55,14 +55,14 @@ void createGrid(int GridSize, int* GridCoords, int procrank) {
     MPI_Cart_sub(GridComm, Subdims.data(), &ColComm);
 }
 
-void MultiplyMatrixforParallel(const std::vector<double> A, const std::vector<double> matrixB,
-    double* matrixC, int size) {
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+void MultiplyMatrixforParallel(double* A, double* B,
+    double* C, int BlockSize) {
+    for (int i = 0; i < BlockSize; i++) {
+        for (int j = 0; j < BlockSize; j++) {
             double temp = 0;
-            for (int k = 0; k < size; k++)
-                temp += A[i*size + k] * matrixB[k*size + j];
-            matrixC[i*size + j] += temp;
+            for (int k = 0; k < BlockSize; k++)
+                temp += A[i*BlockSize + k] * B[k*BlockSize + j];
+           C[i*BlockSize + j] += temp;
         }
     }
 }
@@ -110,7 +110,7 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
 
     std::vector<double> Cblock(BlockSize * BlockSize, 0);
 
-    for (int i = 0; i <GridSize; i++) {
+    for (int i = 0; i < GridSize; i++) {
         std::vector<double> MatrixAblock(BlockSize * BlockSize, 0);
         int pivot = (GridCoords[0] + i) % GridSize;
         if (GridCoords[1] == pivot) {
@@ -118,7 +118,7 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
         }
         MPI_Bcast(MatrixAblock.data(), BlockSize*BlockSize, MPI_DOUBLE, pivot, RowComm);
 
-        MultiplyMatrixforParallel(MatrixAblock, Bblock, Cblock.data(), BlockSize);
+        MultiplyMatrixforParallel(MatrixAblock.data(), Bblock.data(), Cblock.data(), BlockSize);
 
         int NextProc = GridCoords[0] + 1;
         if (GridCoords[0] == GridSize - 1) NextProc = 0;
