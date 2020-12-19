@@ -73,9 +73,9 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     MPI_Status status;
 
-	int GridSize = sqrt(procnum);
-	std::vector<int> GridCoords(2);
-	createGrid(GridSize, GridCoords.data(), procrank);
+    int GridSize = sqrt(procnum);
+    std::vector<int> GridCoords(2);
+    createGrid(GridSize, GridCoords.data(), procrank);
 
     int BlockSize;
     if (procrank == 0) {
@@ -97,12 +97,12 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
                 Bblock[i * BlockSize + j] = B[i * size + j];
             }
         }
-		for (int i = 1; i < procnum; i++) {
-			MPI_Send(A.data() + (i % GridSize) * BlockSize + (i / GridSize) * size * BlockSize,
-				1, matrixBlock, i, 0, GridComm);
-			MPI_Send(B.data() + (i % GridSize) * BlockSize + (i / GridSize) * size * BlockSize,
-				1, matrixBlock, i, 1, GridComm);
-		}
+        for (int i = 1; i < procnum; i++) {
+            MPI_Send(A.data() + (i % GridSize) * BlockSize + (i / GridSize) * size * BlockSize,
+                1, matrixBlock, i, 0, GridComm);
+            MPI_Send(B.data() + (i % GridSize) * BlockSize + (i / GridSize) * size * BlockSize,
+                1, matrixBlock, i, 1, GridComm);
+        }
     } else {
         MPI_Recv(Ablock.data(), BlockSize * BlockSize, MPI_DOUBLE, 0, 0, GridComm, &status);
         MPI_Recv(Bblock.data(), BlockSize * BlockSize, MPI_DOUBLE, 0, 1, GridComm, &status);
@@ -138,7 +138,7 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
         }
         for (int i = 1; i < procnum; i++) {
             MPI_Recv(result.data() + (i / GridSize) * size * BlockSize + BlockSize * (i % GridSize),
-				BlockSize * BlockSize, matrixBlock, i, 3, MPI_COMM_WORLD, &status);
+                BlockSize * BlockSize, matrixBlock, i, 3, MPI_COMM_WORLD, &status);
         }
     } else {
         MPI_Send(Cblock.data(), BlockSize * BlockSize, MPI_DOUBLE, 0, 3, MPI_COMM_WORLD);
