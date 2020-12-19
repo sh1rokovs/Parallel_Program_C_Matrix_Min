@@ -5,176 +5,186 @@
 #include <ctime>
 #include"../../../modules/task_3/romanuyk_algoritm_fox/algoritm_fox.h"
 
-TEST(Parallel_Operations_MPI, Test1) {
-    int procrank, procnum;
-    double t_b1, t_e1, t_b2, t_e2;
-    MPI_Comm_size(MPI_COMM_WORLD, &procnum);
-    MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
-    std::vector<double> a;
-    std::vector<double> b;
-    int size = 16;
-    int GridSize = static_cast<int>(sqrt(procnum));
-    if (GridSize * GridSize == procnum) {
-    int Rem = size % GridSize;
-    if (Rem)
-        size += GridSize - (size % GridSize);
-    if (procrank == 0) {
-        a = genMatrix(size);
-        b = genMatrix(size);
-    }
-    t_b1 = MPI_Wtime();
-    std::vector<double> res1 = MultiplyMatrixParallel(a, b, size);
-    if (procrank == 0) {
-        t_e1 = MPI_Wtime();
-        t_b2 = MPI_Wtime();
-        std::vector<double> res2 = SequentinalMultiMatrix(a, b, size);
-        t_e2 = MPI_Wtime();
-        std::cout << "Parallel time: " << t_e1 - t_b1 << std::endl;
-        std::cout << "Sequentional time: " << t_e2 - t_b2 << std::endl;
-        ASSERT_TRUE(assertMatrix(res1, res2));
-    }
+TEST(Parallel_Operations_MPI, Test_9) {
+    int rank, ProcNum;
+    double beginT, beginT1, endT, endT1;
+    MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    std::vector<double> matA;
+    std::vector<double> matB;
+    std::vector<double> resultPar;
+    int size = 9;
+    int gridSize = static_cast<int>(sqrt(ProcNum));
+    if (gridSize * gridSize == ProcNum) {
+        int remains = size % gridSize;
+        if (remains)
+            size += gridSize - (size % gridSize);
+        if (rank == 0) {
+            matA = genMatrix(size);
+            matB = genMatrix(size);
+        }
+        beginT1 = MPI_Wtime();
+        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        if (rank == 0) {
+            endT1 = MPI_Wtime();
+            beginT = MPI_Wtime();
+            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            endT = MPI_Wtime();
+            std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
+            std::cout << "SEQ time: " << endT - beginT << std::endl;
+            std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
+            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+        }
     } else {
-        if (procrank == 0) {
+        if (rank == 0) {
             ASSERT_FALSE(0);
         }
     }
 }
 
-TEST(Parallel_Operations_MPI, Test2) {
-    int procrank, procnum;
-    double t_b1, t_e1, t_b2, t_e2;
-    MPI_Comm_size(MPI_COMM_WORLD, &procnum);
-    MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
-    std::vector<double> a;
-    std::vector<double> b;
-    int size = 22;
-    int GridSize = static_cast<int>(sqrt(procnum));
-    if (GridSize * GridSize == procnum) {
-    int Rem = size % GridSize;
-    if (Rem)
-        size += GridSize - (size % GridSize);
-    if (procrank == 0) {
-        a = genMatrix(size);
-        b = genMatrix(size);
-    }
-    t_b1 = MPI_Wtime();
-    std::vector<double> res1 = MultiplyMatrixParallel(a, b, size);
-    if (procrank == 0) {
-        t_e1 = MPI_Wtime();
-        t_b2 = MPI_Wtime();
-        std::vector<double> res2 = SequentinalMultiMatrix(a, b, size);
-        t_e2 = MPI_Wtime();
-        std::cout << "Parallel time: " << t_e1 - t_b1 << std::endl;
-        std::cout << "Sequentional time: " << t_e2 - t_b2 << std::endl;
-        ASSERT_TRUE(assertMatrix(res1, res2));
-    }
+TEST(Parallel_Operations_MPI, Test_67) {
+    int rank, ProcNum;
+    double beginT, beginT1, endT, endT1;
+    MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    std::vector<double> matA;
+    std::vector<double> matB;
+    std::vector<double> resultPar;
+    int size = 67;
+    int gridSize = static_cast<int>(sqrt(ProcNum));
+    if (gridSize * gridSize == ProcNum) {
+        int remains = size % gridSize;
+        if (remains)
+            size += gridSize - (size % gridSize);
+        if (rank == 0) {
+            matA = genMatrix(size);
+            matB = genMatrix(size);
+        }
+        beginT1 = MPI_Wtime();
+        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        if (rank == 0) {
+            endT1 = MPI_Wtime();
+            beginT = MPI_Wtime();
+            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            endT = MPI_Wtime();
+            std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
+            std::cout << "SEQ time: " << endT - beginT << std::endl;
+            std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
+            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+        }
     } else {
-        if (procrank == 0) {
+        if (rank == 0) {
             ASSERT_FALSE(0);
         }
     }
 }
 
-TEST(Parallel_Operations_MPI, Test3) {
-    int procrank, procnum;
-    double t_b1, t_e1, t_b2, t_e2;
-    MPI_Comm_size(MPI_COMM_WORLD, &procnum);
-    MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
-    std::vector<double> a;
-    std::vector<double> b;
-    int size = 64;
-    int GridSize = static_cast<int>(sqrt(procnum));
-    if (GridSize * GridSize == procnum) {
-    int Rem = size % GridSize;
-    if (Rem)
-        size += GridSize - (size % GridSize);
-    if (procrank == 0) {
-        a = genMatrix(size);
-        b = genMatrix(size);
-    }
-    t_b1 = MPI_Wtime();
-    std::vector<double> res1 = MultiplyMatrixParallel(a, b, size);
-    if (procrank == 0) {
-        t_e1 = MPI_Wtime();
-        t_b2 = MPI_Wtime();
-        std::vector<double> res2 = SequentinalMultiMatrix(a, b, size);
-        t_e2 = MPI_Wtime();
-        std::cout << "Parallel time: " << t_e1 - t_b1 << std::endl;
-        std::cout << "Sequentional time: " << t_e2 - t_b2 << std::endl;
-        ASSERT_TRUE(assertMatrix(res1, res2));
-    }
+TEST(Parallel_Operations_MPI, Test_90) {
+    int rank, ProcNum;
+    double beginT, beginT1, endT, endT1;
+    MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    std::vector<double> matA;
+    std::vector<double> matB;
+    std::vector<double> resultPar;
+    int size = 90;
+    int gridSize = static_cast<int>(sqrt(ProcNum));
+    if (gridSize * gridSize == ProcNum) {
+        int remains = size % gridSize;
+        if (remains)
+            size += gridSize - (size % gridSize);
+        if (rank == 0) {
+            matA = genMatrix(size);
+            matB = genMatrix(size);
+        }
+        beginT1 = MPI_Wtime();
+        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        if (rank == 0) {
+            endT1 = MPI_Wtime();
+            beginT = MPI_Wtime();
+            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            endT = MPI_Wtime();
+            std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
+            std::cout << "SEQ time: " << endT - beginT << std::endl;
+            std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
+            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+        }
     } else {
-        if (procrank == 0) {
+        if (rank == 0) {
             ASSERT_FALSE(0);
         }
     }
 }
 
-TEST(Parallel_Operations_MPI, Test4) {
-    int procrank, procnum;
-    double t_b1, t_e1, t_b2, t_e2;
-    MPI_Comm_size(MPI_COMM_WORLD, &procnum);
-    MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
-    std::vector<double> a;
-    std::vector<double> b;
-    int size = 49;
-    int GridSize = static_cast<int>(sqrt(procnum));
-    if (GridSize * GridSize == procnum) {
-    int Rem = size % GridSize;
-    if (Rem)
-        size += GridSize - (size % GridSize);
-    if (procrank == 0) {
-        a = genMatrix(size);
-        b = genMatrix(size);
-    }
-    t_b1 = MPI_Wtime();
-    std::vector<double> res1 = MultiplyMatrixParallel(a, b, size);
-    if (procrank == 0) {
-        t_e1 = MPI_Wtime();
-        t_b2 = MPI_Wtime();
-        std::vector<double> res2 = SequentinalMultiMatrix(a, b, size);
-        t_e2 = MPI_Wtime();
-        std::cout << "Parallel time: " << t_e1 - t_b1 << std::endl;
-        std::cout << "Sequentional time: " << t_e2 - t_b2 << std::endl;
-        ASSERT_TRUE(assertMatrix(res1, res2));
-    }
+TEST(Parallel_Operations_MPI, Test_150) {
+    int rank, ProcNum;
+    double beginT, beginT1, endT, endT1;
+    MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    std::vector<double> matA;
+    std::vector<double> matB;
+    std::vector<double> resultPar;
+    int size = 150;
+    int gridSize = static_cast<int>(sqrt(ProcNum));
+    if (gridSize * gridSize == ProcNum) {
+        int remains = size % gridSize;
+        if (remains)
+            size += gridSize - (size % gridSize);
+        if (rank == 0) {
+            matA = genMatrix(size);
+            matB = genMatrix(size);
+        }
+        beginT1 = MPI_Wtime();
+        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        if (rank == 0) {
+            endT1 = MPI_Wtime();
+            beginT = MPI_Wtime();
+            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            endT = MPI_Wtime();
+            std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
+            std::cout << "SEQ time: " << endT - beginT << std::endl;
+            std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
+            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+        }
     } else {
-        if (procrank == 0) {
+        if (rank == 0) {
             ASSERT_FALSE(0);
         }
     }
 }
 
-TEST(Parallel_Operations_MPI, Test5) {
-    int procrank, procnum;
-    double t_b1, t_e1, t_b2, t_e2;
-    MPI_Comm_size(MPI_COMM_WORLD, &procnum);
-    MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
-    std::vector<double> a;
-    std::vector<double> b;
-    int size = 81;
-    int GridSize = static_cast<int>(sqrt(procnum));
-    if (GridSize * GridSize == procnum) {
-    int Rem = size % GridSize;
-    if (Rem)
-        size += GridSize - (size % GridSize);
-    if (procrank == 0) {
-        a = genMatrix(size);
-        b = genMatrix(size);
-    }
-    t_b1 = MPI_Wtime();
-    std::vector<double> res1 = MultiplyMatrixParallel(a, b, size);
-    if (procrank == 0) {
-        t_e1 = MPI_Wtime();
-        t_b2 = MPI_Wtime();
-        std::vector<double> res2 = SequentinalMultiMatrix(a, b, size);
-        t_e2 = MPI_Wtime();
-        std::cout << "Parallel time: " << t_e1 - t_b1 << std::endl;
-        std::cout << "Sequentional time: " << t_e2 - t_b2 << std::endl;
-        ASSERT_TRUE(assertMatrix(res1, res2));
-    }
+TEST(Parallel_Operations_MPI, Test_229) {
+    int rank, ProcNum;
+    double beginT, beginT1, endT, endT1;
+    MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    std::vector<double> matA;
+    std::vector<double> matB;
+    std::vector<double> resultPar;
+    int size = 229;
+    int gridSize = static_cast<int>(sqrt(ProcNum));
+    if (gridSize * gridSize == ProcNum) {
+        int remains = size % gridSize;
+        if (remains)
+            size += gridSize - (size % gridSize);
+        if (rank == 0) {
+            matA = genMatrix(size);
+            matB = genMatrix(size);
+        }
+        beginT1 = MPI_Wtime();
+        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        if (rank == 0) {
+            endT1 = MPI_Wtime();
+            beginT = MPI_Wtime();
+            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            endT = MPI_Wtime();
+            std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
+            std::cout << "SEQ time: " << endT - beginT << std::endl;
+            std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
+            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+        }
     } else {
-        if (procrank == 0) {
+        if (rank == 0) {
             ASSERT_FALSE(0);
         }
     }
