@@ -12,7 +12,6 @@ TEST(Parallel_Operations_MPI, Test1) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     std::vector<double> a;
     std::vector<double> b;
-    std::vector<double> resultPar;
     int size = 16;
     int GridSize = static_cast<int>(sqrt(procnum));
     if (GridSize * GridSize == procnum) {
@@ -48,7 +47,6 @@ TEST(Parallel_Operations_MPI, Test2) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     std::vector<double> a;
     std::vector<double> b;
-    std::vector<double> resultPar;
     int size = 22;
     int GridSize = static_cast<int>(sqrt(procnum));
     if (GridSize * GridSize == procnum) {
@@ -84,7 +82,6 @@ TEST(Parallel_Operations_MPI, Test3) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     std::vector<double> a;
     std::vector<double> b;
-    std::vector<double> resultPar;
     int size = 64;
     int GridSize = static_cast<int>(sqrt(procnum));
     if (GridSize * GridSize == procnum) {
@@ -120,7 +117,6 @@ TEST(Parallel_Operations_MPI, Test4) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     std::vector<double> a;
     std::vector<double> b;
-    std::vector<double> resultPar;
     int size = 49;
     int GridSize = static_cast<int>(sqrt(procnum));
     if (GridSize * GridSize == procnum) {
@@ -156,7 +152,6 @@ TEST(Parallel_Operations_MPI, Test5) {
     MPI_Comm_rank(MPI_COMM_WORLD, &procrank);
     std::vector<double> a;
     std::vector<double> b;
-    std::vector<double> resultPar;
     int size = 81;
     int GridSize = static_cast<int>(sqrt(procnum));
     if (GridSize * GridSize == procnum) {
