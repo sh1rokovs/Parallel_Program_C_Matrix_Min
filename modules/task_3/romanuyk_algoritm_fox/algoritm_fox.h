@@ -5,9 +5,9 @@
 #include <vector>
 
 std::vector<double> genMatrix(int n);
-std::vector<double> SequentinalMultiMatrix(std::vector<double> A, std::vector<double> B, int n);
+std::vector<double> SequentinalMultiMatrix(std::vector<double>& A, std::vector<double>& B, int n);
 
-bool assertMatrix(const std::vector<double> A, const std::vector<double> B);
+bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B);
 
 void createGrid(int GridSize, int* GridCoords, int procrank);
 void MultiplyMatrixforParallel(double* A, double* B,

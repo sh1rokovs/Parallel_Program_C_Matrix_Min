@@ -25,7 +25,7 @@ std::vector<double> genMatrix(int n) {
     return arr;
 }
 
-std::vector<double> SequentinalMultiMatrix(std::vector<double> A, std::vector<double> B, int n) {
+std::vector<double> SequentinalMultiMatrix(std::vector<double>& A, std::vector<double>& B, int n) {
     std::vector<double> res(n * n, 0);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -147,7 +147,7 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
     return result;
 }
 
-bool assertMatrix(const std::vector<double> A, const std::vector<double> B) {
+bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B) {
     for (size_t i = 0; i < A.size(); i++) {
         if ((std::fabs(A[i] - B[i]) >= std::numeric_limits<double>::epsilon() * 1000000000.0))
             return false;
