@@ -20,20 +20,20 @@ TEST(Parallel_Operations_MPI, Test_9) {
         if (remains)
             size += gridSize - (size % gridSize);
         if (rank == 0) {
-            matA = genMatrix(size);
-            matB = genMatrix(size);
+            matA = getRandomMatrix(size);
+            matB = getRandomMatrix(size);
         }
         beginT1 = MPI_Wtime();
-        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        resultPar = foxsAlgorithm(matA, matB, size);
         if (rank == 0) {
             endT1 = MPI_Wtime();
             beginT = MPI_Wtime();
-            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            std::vector<double> resultSeq = seqMult(matA, matB, size);
             endT = MPI_Wtime();
             std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
             std::cout << "SEQ time: " << endT - beginT << std::endl;
             std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
-            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+            ASSERT_TRUE(compareMat(resultPar, resultSeq));
         }
     } else {
         if (rank == 0) {
@@ -57,20 +57,20 @@ TEST(Parallel_Operations_MPI, Test_67) {
         if (remains)
             size += gridSize - (size % gridSize);
         if (rank == 0) {
-            matA = genMatrix(size);
-            matB = genMatrix(size);
+            matA = getRandomMatrix(size);
+            matB = getRandomMatrix(size);
         }
         beginT1 = MPI_Wtime();
-        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        resultPar = foxsAlgorithm(matA, matB, size);
         if (rank == 0) {
             endT1 = MPI_Wtime();
             beginT = MPI_Wtime();
-            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            std::vector<double> resultSeq = seqMult(matA, matB, size);
             endT = MPI_Wtime();
             std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
             std::cout << "SEQ time: " << endT - beginT << std::endl;
             std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
-            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+            ASSERT_TRUE(compareMat(resultPar, resultSeq));
         }
     } else {
         if (rank == 0) {
@@ -94,20 +94,20 @@ TEST(Parallel_Operations_MPI, Test_90) {
         if (remains)
             size += gridSize - (size % gridSize);
         if (rank == 0) {
-            matA = genMatrix(size);
-            matB = genMatrix(size);
+            matA = getRandomMatrix(size);
+            matB = getRandomMatrix(size);
         }
         beginT1 = MPI_Wtime();
-        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        resultPar = foxsAlgorithm(matA, matB, size);
         if (rank == 0) {
             endT1 = MPI_Wtime();
             beginT = MPI_Wtime();
-            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            std::vector<double> resultSeq = seqMult(matA, matB, size);
             endT = MPI_Wtime();
             std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
             std::cout << "SEQ time: " << endT - beginT << std::endl;
             std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
-            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+            ASSERT_TRUE(compareMat(resultPar, resultSeq));
         }
     } else {
         if (rank == 0) {
@@ -131,20 +131,20 @@ TEST(Parallel_Operations_MPI, Test_150) {
         if (remains)
             size += gridSize - (size % gridSize);
         if (rank == 0) {
-            matA = genMatrix(size);
-            matB = genMatrix(size);
+            matA = getRandomMatrix(size);
+            matB = getRandomMatrix(size);
         }
         beginT1 = MPI_Wtime();
-        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        resultPar = foxsAlgorithm(matA, matB, size);
         if (rank == 0) {
             endT1 = MPI_Wtime();
             beginT = MPI_Wtime();
-            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            std::vector<double> resultSeq = seqMult(matA, matB, size);
             endT = MPI_Wtime();
             std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
             std::cout << "SEQ time: " << endT - beginT << std::endl;
             std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
-            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+            ASSERT_TRUE(compareMat(resultPar, resultSeq));
         }
     } else {
         if (rank == 0) {
@@ -168,20 +168,20 @@ TEST(Parallel_Operations_MPI, Test_229) {
         if (remains)
             size += gridSize - (size % gridSize);
         if (rank == 0) {
-            matA = genMatrix(size);
-            matB = genMatrix(size);
+            matA = getRandomMatrix(size);
+            matB = getRandomMatrix(size);
         }
         beginT1 = MPI_Wtime();
-        resultPar = MultiplyMatrixParallel(matA, matB, size);
+        resultPar = foxsAlgorithm(matA, matB, size);
         if (rank == 0) {
             endT1 = MPI_Wtime();
             beginT = MPI_Wtime();
-            std::vector<double> resultSeq = SequentinalMultiMatrix(matA, matB, size);
+            std::vector<double> resultSeq = seqMult(matA, matB, size);
             endT = MPI_Wtime();
             std::cout << "MPI time:  " << endT1 - beginT1 << std::endl;
             std::cout << "SEQ time: " << endT - beginT << std::endl;
             std::cout << "efficiency: " << (endT - beginT) / (endT1 - beginT1) << std::endl;
-            ASSERT_TRUE(assertMatrix(resultPar, resultSeq));
+            ASSERT_TRUE(compareMat(resultPar, resultSeq));
         }
     } else {
         if (rank == 0) {
