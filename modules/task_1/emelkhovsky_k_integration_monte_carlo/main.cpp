@@ -13,9 +13,9 @@ TEST(Parallel_Operations_MPI, Test1) {
     b = 10;
     N = 10000;
     double dop = static_cast<double>(b - a) / N;
-    double parallel_result = ParallelFunc(N, a, b) * dop;
+    double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
-        double easy_result = EasyFunc(N, a, b);
+        double easy_result = EasyFunc(N, a, b, 0);
         ASSERT_NEAR(parallel_result, easy_result, 1);
     }
 }
@@ -25,12 +25,12 @@ TEST(Parallel_Operations_MPI, Test2) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     int a, b, N;
     a = 1;
-    b = 100;
+    b = 10;
     N = 1000;
     double dop = static_cast<double>(b - a) / N;
-    double parallel_result = ParallelFunc(N, a, b) * dop;
+    double parallel_result = ParallelFunc(N, a, b, 1) * dop;
     if (rank == 0) {
-        double easy_result = EasyFunc(N, a, b);
+        double easy_result = EasyFunc(N, a, b, 1);
         ASSERT_NEAR(parallel_result, easy_result, 500);
     }
 }
@@ -43,9 +43,9 @@ TEST(Parallel_Operations_MPI, Test3) {
     b = -1;
     N = 1000;
     double dop = static_cast<double>(b - a) / N;
-    double parallel_result = ParallelFunc(N, a, b) * dop;
+    double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
-        double easy_result = EasyFunc(N, a, b);
+        double easy_result = EasyFunc(N, a, b, 0);
         ASSERT_NEAR(parallel_result, easy_result, 2);
     }
 }
@@ -56,11 +56,11 @@ TEST(Parallel_Operations_MPI, Test4) {
     int a, b, N;
     a = 1;
     b = 10;
-    N = 100;
+    N = 10000;
     double dop = static_cast<double>(b - a) / N;
-    double parallel_result = ParallelFunc(N, a, b) * dop;
+    double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
-        double easy_result = EasyFunc(N, a, b);
+        double easy_result = EasyFunc(N, a, b, 0);
         ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
@@ -71,11 +71,11 @@ TEST(Parallel_Operations_MPI, Test5) {
     int a, b, N;
     a = -1;
     b = 10;
-    N = 1000;
+    N = 10000;
     double dop = static_cast<double>(b - a) / N;
-    double parallel_result = ParallelFunc(N, a, b) * dop;
+    double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
-        double easy_result = EasyFunc(N, a, b);
+        double easy_result = EasyFunc(N, a, b, 0);
         ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }

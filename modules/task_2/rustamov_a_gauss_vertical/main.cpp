@@ -152,6 +152,7 @@ TEST(Gauss_Vertical, 6x6x6) {
     }
 }
 
+
 TEST(Gauss_Vertical, 100x100x100) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
