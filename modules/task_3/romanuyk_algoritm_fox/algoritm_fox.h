@@ -2,6 +2,7 @@
 #ifndef MODULES_TASK_3_ROMANUYK_ALGORITM_FOX_ALGORITM_FOX_H_
 #define MODULES_TASK_3_ROMANUYK_ALGORITM_FOX_ALGORITM_FOX_H_
 
+#include <iostream>
 #include <vector>
 
 bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B);

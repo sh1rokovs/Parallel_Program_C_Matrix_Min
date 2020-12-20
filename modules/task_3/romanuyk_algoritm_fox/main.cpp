@@ -3,6 +3,8 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <ctime>
+#include <algorithm>
+#include <cmath>
 #include"../../../modules/task_3/romanuyk_algoritm_fox/algoritm_fox.h"
 
 TEST(Parallel_Operations_MPI, Test1) {

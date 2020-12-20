@@ -24,11 +24,13 @@ bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B) {
 }
 
 std::vector<double> genMatrix(int n) {
-    std::mt19937 gen;
-    gen.seed(static_cast<unsigned int>(time(0)));
-    std::vector<double> arr(n*n);
-    for (int i = 0; i < n * n; i++) {
-        arr[i] = gen() % 100 + static_cast<float>(gen() % 20) / 10;
+    int SIZE = n * n;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> urd(-50, 50);
+    std::vector<double> arr(SIZE);
+    for (int i = 0; i < SIZE; i++) {
+        arr[i] = urd(gen);
     }
     return arr;
 }
