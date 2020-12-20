@@ -7,6 +7,7 @@
 #include "./bessolitsyn_s_gauss.h"
 
 TEST(Parallel_Operations_MPI, Test_100) {
+    MPI_Barrier(MPI_COMM_WORLD);
     int p_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
     int n = 100;
@@ -29,6 +30,7 @@ TEST(Parallel_Operations_MPI, Test_100) {
 }
 
 TEST(Parallel_Operations_MPI, Test_500) {
+    MPI_Barrier(MPI_COMM_WORLD);
     int p_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
     int n = 500;
@@ -51,6 +53,7 @@ TEST(Parallel_Operations_MPI, Test_500) {
 }
 
 TEST(Parallel_Operations_MPI, Test_1000) {
+    MPI_Barrier(MPI_COMM_WORLD);
     int p_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
     int n = 1000;
@@ -73,6 +76,7 @@ TEST(Parallel_Operations_MPI, Test_1000) {
 }
 
 TEST(Parallel_Operations_MPI, Test_5000) {
+    MPI_Barrier(MPI_COMM_WORLD);
     int p_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
     int n = 5000;
@@ -95,6 +99,7 @@ TEST(Parallel_Operations_MPI, Test_5000) {
 }
 
 TEST(Parallel_Operations_MPI, Test_10000) {
+    MPI_Barrier(MPI_COMM_WORLD);
     int p_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &p_rank);
     int n = 10000;
