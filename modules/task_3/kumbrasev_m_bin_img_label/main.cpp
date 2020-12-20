@@ -55,7 +55,6 @@ TEST(label, test2) {
     img.data[4][2] = 1;
     img.data[5][5] = 1;
   }
-  
   start_time = MPI_Wtime();
   labeling(&img);
   end_time = MPI_Wtime();
@@ -118,7 +117,6 @@ TEST(label, test4) {
     img.data[3][2] = 1;
     img.data[5][0] = 1;
   }
-  
   start_time = MPI_Wtime();
   labeling(&img);
   end_time = MPI_Wtime();
@@ -156,7 +154,6 @@ TEST(label, test5) {
     img.data[3][4] = 1;
     img.data[2][4] = 1;
   }
-  
   start_time = MPI_Wtime();
   labeling(&img);
   end_time = MPI_Wtime();
