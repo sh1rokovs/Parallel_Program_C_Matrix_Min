@@ -1,9 +1,9 @@
 // Copyright 2020 Kumbrasev Mark
-#ifndef MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABELING_BIN_IMG_LABELING_H_
-#define MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABELING_BIN_IMG_LABELING_H_
+#ifndef MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABEL_BIN_IMG_LABELING_H_
+#define MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABEL_BIN_IMG_LABELING_H_
 
-#include <iostream>
 #include <mpi.h>
+#include <iostream>
 
 struct image {
   int height, width, count;
@@ -32,4 +32,4 @@ struct image {
 
 void labeling(image* img);
 
-#endif  // MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABELING_BIN_IMG_LABELING_H_
+#endif  // MODULES_TASK_3_KUMBRASEV_M_BIN_IMG_LABEL_BIN_IMG_LABELING_H_

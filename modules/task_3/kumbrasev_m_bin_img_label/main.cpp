@@ -69,6 +69,7 @@ TEST(label, test2) {
 
 TEST(label, test3) {
   int rank, size, exp_count = 1;
+  double start_time, end_time;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   image img(4, 4);

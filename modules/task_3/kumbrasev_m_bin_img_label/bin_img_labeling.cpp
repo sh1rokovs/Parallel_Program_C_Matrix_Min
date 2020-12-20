@@ -1,6 +1,6 @@
 // Copyright 2020 Kumbrasev Mark
-#include <iostream>
 #include <mpi.h>
+#include <iostream>
 #include "../../../modules/task_3/kumbrasev_m_bin_img_label/bin_img_labeling.h"
 
 void labeling(image* img) {
@@ -102,7 +102,8 @@ void labeling(image* img) {
       MPI_Send(&loc_img_arr[0], new_c_str * img->width, MPI_INT, 0, 0, MPI_COMM_WORLD);
   } else {
     for (int i = 1; i < size; i++) {
-      MPI_Recv(&img_arr[i * img->width * c_str + rest * img->width], new_c_str * img->width, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+      MPI_Recv(&img_arr[i * img->width * c_str + rest * img->width],
+	  new_c_str * img->width, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
     }
   }
 
