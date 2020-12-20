@@ -103,7 +103,7 @@ void labeling(image* img) {
   } else {
     for (int i = 1; i < size; i++) {
       MPI_Recv(&img_arr[i * img->width * c_str + rest * img->width],
-	  new_c_str * img->width, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+      new_c_str * img->width, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
     }
   }
 
