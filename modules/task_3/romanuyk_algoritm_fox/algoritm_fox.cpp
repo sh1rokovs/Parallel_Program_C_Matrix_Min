@@ -15,6 +15,14 @@ MPI_Comm GridComm;
 MPI_Comm ColComm;
 MPI_Comm RowComm;
 
+bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B) {
+    for (size_t i = 0; i < A.size(); i++) {
+        if ((std::fabs(A[i] - B[i]) >= std::numeric_limits<double>::epsilon() * 1000000000.0))
+            return false;
+    }
+    return true;
+}
+
 std::vector<double> genMatrix(int n) {
     std::mt19937 gen;
     gen.seed(static_cast<unsigned int>(time(0)));
@@ -143,12 +151,4 @@ std::vector<double> MultiplyMatrixParallel(const std::vector<double>& A, const s
     }
     MPI_Type_free(&matrixBlock);
     return result;
-}
-
-bool assertMatrix(const std::vector<double>& A, const std::vector<double>& B) {
-    for (size_t i = 0; i < A.size(); i++) {
-        if ((std::fabs(A[i] - B[i]) >= std::numeric_limits<double>::epsilon() * 1000000000.0))
-            return false;
-    }
-    return true;
 }
