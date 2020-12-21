@@ -182,7 +182,7 @@ TEST(Parallel_Operations_MPI, Test_Matrix_4x5) {
     global_mat[1][0] = 21;
     global_mat[1][1] = 17;
     global_mat[1][2] = 42;
-    global_mat[1][3] = 231;
+    global_mat[1][3] = 212;
     global_mat[1][4] = 174;
     global_mat[2][0] = 157;
     global_mat[2][1] = 53;
