@@ -8,8 +8,8 @@
 TEST(Parallel_Operations_MPI, Test_Matrix_4x3) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
-    int rows = 4;
-    int cols = 3;
+    int rows = 2;
+    int cols = 4;
     double alpha = 1.5;
     int beta = 1;
     Matrix global_mat(rows, std::vector<int>(cols));
@@ -17,15 +17,11 @@ TEST(Parallel_Operations_MPI, Test_Matrix_4x3) {
     global_mat[0][0] = 178;
     global_mat[0][1] = 41;
     global_mat[0][2] = 243;
+    global_mat[0][3] = 87;
     global_mat[1][0] = 21;
     global_mat[1][1] = 17;
     global_mat[1][2] = 42;
-    global_mat[2][0] = 157;
-    global_mat[2][1] = 53;
-    global_mat[2][2] = 229;
-    global_mat[3][0] = 123;
-    global_mat[3][1] = 42;
-    global_mat[3][2] = 89;
+    global_mat[0][3] = 198;
     if (procRank == 0) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
