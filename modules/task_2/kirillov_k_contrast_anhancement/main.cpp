@@ -5,23 +5,23 @@
 #include <vector>
 #include<iostream>
 #include "./contrast_enhancement.h"
-TEST(Parallel_Operations_MPI, Test_Matrix_4x3) {
+TEST(Parallel_Operations_MPI, Test_Matrix_4x2) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
-    int rows = 2;
-    int cols = 4;
+    int rows = 4;
+    int cols = 2;
     double alpha = 1.5;
     int beta = 1;
     Matrix global_mat(rows, std::vector<int>(cols));
     Matrix local_mat(rows, std::vector<int>(cols));
     global_mat[0][0] = 178;
     global_mat[0][1] = 41;
-    global_mat[0][2] = 243;
-    global_mat[0][3] = 87;
     global_mat[1][0] = 21;
     global_mat[1][1] = 17;
-    global_mat[1][2] = 42;
-    global_mat[0][3] = 198;
+    global_mat[2][0] = 82;
+    global_mat[2][1] = 193;
+    global_mat[3][0] = 56;
+    global_mat[3][1] = 212;
     if (procRank == 0) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -39,11 +39,11 @@ TEST(Parallel_Operations_MPI, Test_Matrix_4x3) {
         }
     }
 }
-TEST(Parallel_Operations_MPI, Test_Matrix_3x4) {
+TEST(Parallel_Operations_MPI, Test_Matrix_4x3) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
-    int rows = 3;
-    int cols = 4;
+    int rows = 4;
+    int cols = 3;
     double alpha = 1.5;
     int beta = 1;
     Matrix global_mat(rows, std::vector<int>(cols));
@@ -51,15 +51,15 @@ TEST(Parallel_Operations_MPI, Test_Matrix_3x4) {
     global_mat[0][0] = 178;
     global_mat[0][1] = 41;
     global_mat[0][2] = 243;
-    global_mat[0][3] = 217;
     global_mat[1][0] = 21;
     global_mat[1][1] = 17;
     global_mat[1][2] = 42;
-    global_mat[1][3] = 165;
     global_mat[2][0] = 157;
     global_mat[2][1] = 53;
     global_mat[2][2] = 229;
-    global_mat[2][3] = 132;
+    global_mat[3][0] = 87;
+    global_mat[3][1] = 176;
+    global_mat[3][2] = 112;
     if (procRank == 0) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
