@@ -152,4 +152,5 @@ void labeling(image* img) {
     }
   }
   img->count = res_exp;
+  delete loc_img;
 }
