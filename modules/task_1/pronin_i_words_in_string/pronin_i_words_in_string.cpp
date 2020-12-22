@@ -38,8 +38,7 @@ int ParallelOperations(std::string str, int len) {
     std::string localStr = "";
     if (rank == 0) {
         localStr = std::string(str.cbegin(), str.cbegin() + epsilon + delta);
-    }
-    else {
+    } else {
         std::vector <char> local(delta);
         MPI_Status status;
         MPI_Recv(&local[0], delta, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &status);
