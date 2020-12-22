@@ -1,4 +1,4 @@
-﻿// Copyright 2020 Tyurmina Alexandra
+﻿  // Copyright 2020 Tyurmina Alexandra
 
 #include <mpi.h>
 #include <utility>

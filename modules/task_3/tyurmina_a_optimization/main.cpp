@@ -24,10 +24,10 @@ TEST(global_GlobalOpt, TEST0_seq_min) {
 TEST(global_GlobalOpt, TEST1_par_min) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    GlobalOpt opt(0.6, 3, f_test1, 1e-5);
+    GlobalOpt opt(0.3, 2.2, f_test2, 1e-5);
 
     double result = opt.GlobalSearchPar(800);
-    double correct_result = opt.GlobalSearchSeq(800);
+    double correct_result = 0.3;
     if (rank == 0) {
         ASSERT_NEAR(result, correct_result, 1e-4);
     }
