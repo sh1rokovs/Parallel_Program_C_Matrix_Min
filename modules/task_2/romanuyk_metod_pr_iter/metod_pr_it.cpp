@@ -41,28 +41,17 @@ std::vector<double> Iteration(std::vector<double> a, std::vector<double> y, doub
 }
 
 std::vector<double> genMatrix(int size) {
-    std::mt19937 gen;
-    gen.seed(static_cast<unsigned int>(time(0)));
-    std::vector<double> arr(size*size);
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++) {
-            arr[i*size + j] = gen() % 100;
-        }
-
-    int max = 0;
-    for (int i = 0; i < size; i++)
-        for (int j = 0; j < size; j++) {
-            if (arr[i*size + j] > max) max = arr[i*size + j];
-        }
-
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> urd(-50, 50);
+    std::vector<double> matrix(size * size);
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            if (i == j) {
-                if (arr[i*size + j] <= max) { arr[i*size + j] += ((max - arr[i*size + j] + 1) + gen() % 20); }
-            }
+            matrix[i * size + j] = urd(gen);
         }
+        matrix[i * size + i] = size + 2;
     }
-    return arr;
+    return matrix;
 }
 
 std::vector<double> genRandY(int size) {
