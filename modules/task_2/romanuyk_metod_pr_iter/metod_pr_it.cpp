@@ -111,7 +111,7 @@ std::vector<double> genParallelIter(std::vector<double> a, std::vector<double> y
             y[i] = y[i] / a[i * size + i];
         }
     }
-    
+
     MPI_Scatterv(y.data(), sendcounts_y, displs_y, MPI_DOUBLE, y_proc, procsize, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(res, size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
