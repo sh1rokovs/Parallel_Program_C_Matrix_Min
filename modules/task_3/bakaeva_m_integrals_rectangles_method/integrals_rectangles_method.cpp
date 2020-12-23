@@ -22,7 +22,7 @@ double getSequentialIntegrals(const int n, vector<pair<double, double> > a_b, do
     // countIntegrals - количество интегралов
 
     int countIntegrals = a_b.size();
-    int size = 1;
+    size_t size = 1;
     vector<double> h(countIntegrals);
     for (int i = 0; i < countIntegrals; i++) {
         h[i] = (a_b[i].second - a_b[i].first) / n;
@@ -31,7 +31,7 @@ double getSequentialIntegrals(const int n, vector<pair<double, double> > a_b, do
 
     double result = 0.0;
     vector<double> forCalculateF(countIntegrals);
-    for (int j = 0; j < size; j++) {
+    for (size_t j = 0; j < size; j++) {
     for (int i = 0; i < countIntegrals; i++) {
         forCalculateF[i] = a_b[i].first + (j % n) * h[i] + h[i] * 0.5;
     }
@@ -56,12 +56,12 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     int countIntegrals = a_b.size();
     vector<double> h(n);
     vector<pair<double, double>> ab(countIntegrals);
-    int countElements;  // Количество всех одночленов
+    size_t countElements;  // Количество всех одночленов
 
     // Находим шаги разбиения для каждого отрезка [a,b]
     if (rank == 0) {
         countElements = 1;
-        for (int i = 0; i < countIntegrals; i++) {
+        for (size_t i = 0; i < countIntegrals; i++) {
             h[i] = (a_b[i].second - a_b[i].first) / n;
             ab[i] = a_b[i];
         }
@@ -74,13 +74,13 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
 
     // Рассылаем данные всем процессам
     int length = n;  // Количество отрезков интегрирования
-    MPI_Bcast(&countElements, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&countElements, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
     MPI_Bcast(&length, countIntegrals, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(&h[0], countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(&ab[0], 2 * countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-    int delta = countElements / size;
-    int remainder = countElements % size;
+    size_t delta = countElements / size;
+    size_t remainder = countElements % size;
     if (rank < remainder) {
         delta += 1;
     }
