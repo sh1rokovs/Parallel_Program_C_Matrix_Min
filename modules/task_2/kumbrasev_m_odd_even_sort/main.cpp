@@ -7,11 +7,12 @@
 
 TEST(Parallel_Operations_MPI, Test_1000) {
     int my_rank, comm_sz;
-    int size = 1000;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    int presize = 1000;
+	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
+	presize = presize * comm_sz;
+	std::vector<int> arr = create_vector(presize);
+    int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
@@ -26,7 +27,7 @@ TEST(Parallel_Operations_MPI, Test_1000) {
             }
         }
     }
-    std::vector<int> final_arr(size);
+    std::vector<int> final_arr(presize);
     MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
@@ -35,11 +36,12 @@ TEST(Parallel_Operations_MPI, Test_1000) {
 
 TEST(Parallel_Operations_MPI, Test_100) {
     int my_rank, comm_sz;
-    int size = 100;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    int presize = 100;
+	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
+	presize = presize * comm_sz;
+	std::vector<int> arr = create_vector(presize);
+    int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
@@ -54,7 +56,7 @@ TEST(Parallel_Operations_MPI, Test_100) {
             }
         }
     }
-    std::vector<int> final_arr(size);
+    std::vector<int> final_arr(presize);
     MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
@@ -63,11 +65,12 @@ TEST(Parallel_Operations_MPI, Test_100) {
 
 TEST(Parallel_Operations_MPI, Test_250) {
     int my_rank, comm_sz;
-    int size = 250;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    int presize = 250;
+	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
+	presize = presize * comm_sz;
+	std::vector<int> arr = create_vector(presize);
+    int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
@@ -82,7 +85,7 @@ TEST(Parallel_Operations_MPI, Test_250) {
             }
         }
     }
-    std::vector<int> final_arr(size);
+    std::vector<int> final_arr(presize);
     MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
@@ -91,11 +94,12 @@ TEST(Parallel_Operations_MPI, Test_250) {
 
 TEST(Parallel_Operations_MPI, Test_456) {
     int my_rank, comm_sz;
-    int size = 456;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    int presize = 456;
+	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
+	presize = presize * comm_sz;
+	std::vector<int> arr = create_vector(presize);
+    int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
@@ -110,7 +114,7 @@ TEST(Parallel_Operations_MPI, Test_456) {
             }
         }
     }
-    std::vector<int> final_arr(size);
+    std::vector<int> final_arr(presize);
     MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);
@@ -119,11 +123,12 @@ TEST(Parallel_Operations_MPI, Test_456) {
 
 TEST(Parallel_Operations_MPI, Test_10000) {
     int my_rank, comm_sz;
-    int size = 10000;
-    std::vector<int> arr = create_vector(size);
-    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    int presize = 10000;
+	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    int local_size = size / comm_sz;
+	presize = presize * comm_sz;
+	std::vector<int> arr = create_vector(presize);
+    int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
     MPI_Scatter(arr.data(), local_size, MPI_INT, local_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
@@ -138,7 +143,7 @@ TEST(Parallel_Operations_MPI, Test_10000) {
             }
         }
     }
-    std::vector<int> final_arr(size);
+    std::vector<int> final_arr(presize);
     MPI_Gather(local_arr.data(), local_size, MPI_INT, final_arr.data(), local_size, MPI_INT, 0, MPI_COMM_WORLD);
     if (my_rank == 0) {
         ASSERT_EQ(arr, final_arr);

@@ -63,30 +63,7 @@ void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm
         MPI_Recv(arr.data(), size, MPI_INT, RCV_RANK, 1, COMM, MPI_STATUS_IGNORE);
     } else {
         MPI_Recv(temp_arr.data(), size, MPI_INT, SEND_RANK, 0, COMM, MPI_STATUS_IGNORE);
-
-        int * first = &aux_arr[0];
-        int * last = &aux_arr[size * 2];
-
-        int * runner_1 = &arr[0];
-        int * runner_2 = &temp_arr[0];
-
-        while (first != last) {
-            if (runner_1 == &arr[size]) {
-                while (runner_2 != &temp_arr[size]) {
-                    *first++ = *runner_2++;
-                }
-            } else if (runner_2 == &temp_arr[size]) {
-                while (runner_1 != &arr[size]) {
-                    *first++ = *runner_1++;
-                }
-            } else if (*runner_1 < *runner_2) {
-                *first++ = *runner_1++;
-            } else {
-                *first++ = *runner_2++;
-            }
-        }
-
-        int itr = size;
+		int itr = size;
         for (int i = 0; i < size; i++) {
             temp_arr[i] = aux_arr[i];
             arr[i] = aux_arr[itr];
