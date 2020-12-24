@@ -63,7 +63,7 @@ void PHASE(int SEND_RANK, int RCV_RANK, std::vector<int> arr, int size, MPI_Comm
         MPI_Recv(arr.data(), size, MPI_INT, RCV_RANK, 1, COMM, MPI_STATUS_IGNORE);
     } else {
         MPI_Recv(temp_arr.data(), size, MPI_INT, SEND_RANK, 0, COMM, MPI_STATUS_IGNORE);
-		int itr = size;
+        int itr = size;
         for (int i = 0; i < size; i++) {
             temp_arr[i] = aux_arr[i];
             arr[i] = aux_arr[itr];

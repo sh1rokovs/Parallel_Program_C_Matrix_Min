@@ -8,10 +8,10 @@
 TEST(Parallel_Operations_MPI, Test_1000) {
     int my_rank, comm_sz;
     int presize = 1000;
-	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-	presize = presize * comm_sz;
-	std::vector<int> arr = create_vector(presize);
+    presize = presize * comm_sz;
+    std::vector<int> arr = create_vector(presize);
     int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
@@ -37,10 +37,10 @@ TEST(Parallel_Operations_MPI, Test_1000) {
 TEST(Parallel_Operations_MPI, Test_100) {
     int my_rank, comm_sz;
     int presize = 100;
-	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-	presize = presize * comm_sz;
-	std::vector<int> arr = create_vector(presize);
+    presize = presize * comm_sz;
+    std::vector<int> arr = create_vector(presize);
     int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
@@ -66,10 +66,10 @@ TEST(Parallel_Operations_MPI, Test_100) {
 TEST(Parallel_Operations_MPI, Test_250) {
     int my_rank, comm_sz;
     int presize = 250;
-	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-	presize = presize * comm_sz;
-	std::vector<int> arr = create_vector(presize);
+    presize = presize * comm_sz;
+    std::vector<int> arr = create_vector(presize);
     int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
@@ -95,10 +95,10 @@ TEST(Parallel_Operations_MPI, Test_250) {
 TEST(Parallel_Operations_MPI, Test_456) {
     int my_rank, comm_sz;
     int presize = 456;
-	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-	presize = presize * comm_sz;
-	std::vector<int> arr = create_vector(presize);
+    presize = presize * comm_sz;
+    std::vector<int> arr = create_vector(presize);
     int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
@@ -124,10 +124,10 @@ TEST(Parallel_Operations_MPI, Test_456) {
 TEST(Parallel_Operations_MPI, Test_10000) {
     int my_rank, comm_sz;
     int presize = 10000;
-	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-	presize = presize * comm_sz;
-	std::vector<int> arr = create_vector(presize);
+    presize = presize * comm_sz;
+    std::vector<int> arr = create_vector(presize);
     int local_size = presize / comm_sz;
     std::vector<int> local_arr(local_size);
     bubbleSort(arr.data(), arr.size());
