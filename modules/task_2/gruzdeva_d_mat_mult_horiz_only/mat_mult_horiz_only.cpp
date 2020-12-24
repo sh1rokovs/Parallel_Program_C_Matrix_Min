@@ -68,7 +68,7 @@ std::vector<double> getParallelMultiplication(std::vector<double> matrixA,
         }
         prevData -= 1;
         if (prevData < 0) prevData = size - 1;
-        MPI_Sendrecv_replace(matrixBStripe.data(), stripeSize, MPI_DOUBLE, 
+        MPI_Sendrecv_replace(matrixBStripe.data(), stripeSize, MPI_DOUBLE,
             nextProc, 0, prevProc, 0, MPI_COMM_WORLD, &Status);
     }
     MPI_Gather(matrixCStripe.data(), stripeSize, MPI_DOUBLE, matrixC.data(), stripeSize, MPI_DOUBLE, 0, MPI_COMM_WORLD);
