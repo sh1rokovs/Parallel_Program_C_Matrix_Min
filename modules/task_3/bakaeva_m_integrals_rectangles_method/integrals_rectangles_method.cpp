@@ -61,7 +61,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     // Находим шаги разбиения для каждого отрезка [a,b]
     if (rank == 0) {
         countElements = 1;
-        for (size_t i = 0; i < countIntegrals; i++) {
+        for (int i = 0; i < countIntegrals; i++) {
             h[i] = (a_b[i].second - a_b[i].first) / n;
             ab[i] = a_b[i];
         }
@@ -94,15 +94,15 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
 
     // Каждый процесс вычисляет свое количество sum(f(x..))
     vector<vector<double>> forCalculateF(delta);
-    for (int i = 0; i < delta; i++) {
-        int number = tmp + i;
+    for (size_t i = 0; i < delta; i++) {
+        int number = static_cast<int>(tmp + i);
         for (int j = 0; j < countIntegrals - 1; j++) {
             forCalculateF[i].push_back(ab[j].first + h[j] * (number % n) + h[j] * 0.5);
         }
     }
 
     double result = 0.0;
-    for (int i = 0; i < delta; i++) {
+    for (size_t i = 0; i < delta; i++) {
         for (int j = 0; j < n; j++) {
             forCalculateF[i].push_back(ab[countIntegrals - 1].first + (j + 0.5) * h[countIntegrals - 1]);
             result += F(forCalculateF[i]);
