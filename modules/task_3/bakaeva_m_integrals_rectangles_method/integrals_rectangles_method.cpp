@@ -87,7 +87,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
 
     int tmp = 0;
     if (rank < remainder) {
-        tmp = static_cast<int>(rank * delta);
+        tmp = (rank * delta);
     } else {
         tmp = (remainder + rank * delta);
     }
