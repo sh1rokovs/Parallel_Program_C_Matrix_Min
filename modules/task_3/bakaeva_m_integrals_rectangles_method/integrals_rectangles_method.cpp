@@ -21,7 +21,7 @@ double getSequentialIntegrals(const int n, vector<pair<double, double> > a_b, do
     // Integral = h * Summ(f(xi))
     // countIntegrals - количество интегралов
 
-    int countIntegrals = a_b.size();
+    int countIntegrals = static_cast<int>(a_b.size());
     size_t size = 1;
     vector<double> h(countIntegrals);
     for (int i = 0; i < countIntegrals; i++) {
@@ -53,7 +53,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     //Получение номера текущего процесса в рамках коммуникатора
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    size_t countIntegrals = a_b.size();
+    int countIntegrals = static_cast<int>(a_b.size());
     vector<double> h(n);
     vector<pair<double, double>> ab(countIntegrals);
     size_t countElements;  // Количество всех одночленов
@@ -65,7 +65,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
             h[i] = (a_b[i].second - a_b[i].first) / n;
             ab[i] = a_b[i];
         }
-        size_t j = 0;
+        int j = 0;
         while (j != countIntegrals - 1) {
             countElements *= n;
             j++;
@@ -75,7 +75,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     // Рассылаем данные всем процессам
     int length = n;  // Количество отрезков интегрирования
     MPI_Bcast(&countElements, 1, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
-    MPI_Bcast(&length, countIntegrals, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&length, countIntegrals, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(&h[0], countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(&ab[0], 2 * countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
@@ -87,22 +87,22 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
 
     int tmp = 0;
     if (rank < remainder) {
-        tmp = rank * delta;
+        tmp = static_cast<int>(rank * delta);
     } else {
-        tmp = remainder + rank * delta;
+        tmp = (remainder + rank * delta);
     }
 
     // Каждый процесс вычисляет свое количество sum(f(x..))
     vector<vector<double>> forCalculateF(delta);
-    for (size_t i = 0; i < delta; i++) {
+    for (int i = 0; i < delta; i++) {
         int number = tmp + i;
-        for (size_t j = 0; j < countIntegrals - 1; j++) {
+        for (int j = 0; j < countIntegrals - 1; j++) {
             forCalculateF[i].push_back(ab[j].first + h[j] * (number % n) + h[j] * 0.5);
         }
     }
 
     double result = 0.0;
-    for (size_t i = 0; i < delta; i++) {
+    for (int i = 0; i < delta; i++) {
         for (int j = 0; j < n; j++) {
             forCalculateF[i].push_back(ab[countIntegrals - 1].first + (j + 0.5) * h[countIntegrals - 1]);
             result += F(forCalculateF[i]);
@@ -114,7 +114,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     double Integral = 0.0;
     MPI_Reduce(&result, &Integral, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     // Умножение на h по формуле
-    for (size_t i = 0; i < countIntegrals; i++) {
+    for (int i = 0; i < countIntegrals; i++) {
         Integral *= h[i];
     }
 
