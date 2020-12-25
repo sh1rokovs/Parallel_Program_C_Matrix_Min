@@ -46,7 +46,7 @@ double getSequentialIntegrals(const int n, vector<pair<double, double> > a_b, do
 }
 
 double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, double (*F)(vector<double>)) {
-    size_t size, rank;
+    int size, rank;
 
     //Число задействованных процессов
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -79,8 +79,8 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     MPI_Bcast(&h[0], countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(&ab[0], 2 * countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-    size_t delta = countElements / size;
-    size_t remainder = countElements % size;
+    int delta = static_cast<int>(countElements / size);
+    int remainder = static_cast<int>(countElements % size);
     if (rank < remainder) {
         delta += 1;
     }
@@ -103,7 +103,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
 
     double result = 0.0;
     for (size_t i = 0; i < delta; i++) {
-        for (size_t j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++) {
             forCalculateF[i].push_back(ab[countIntegrals - 1].first + (j + 0.5) * h[countIntegrals - 1]);
             result += F(forCalculateF[i]);
             forCalculateF[i].pop_back();
