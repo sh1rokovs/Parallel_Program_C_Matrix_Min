@@ -79,7 +79,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     MPI_Bcast(&h[0], countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Bcast(&ab[0], 2 * countIntegrals, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-    int delta = static_cast<int>(countElements / size);
+    int delta = static_cast<size_t>(countElements / size);
     int remainder = static_cast<int>(countElements % size);
     if (rank < remainder) {
         delta += 1;
