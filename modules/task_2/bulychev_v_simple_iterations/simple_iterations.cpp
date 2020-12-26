@@ -106,7 +106,6 @@ std::vector<double> MPI_Simple_iterations_Method(std::vector<double> mat,
     MPI_Scatterv(&vec[0], &counts_vec[0], &displs_vec[0], MPI_DOUBLE,
         &l_vec[0], counts_vec[rank], MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-    double t;
     for (int i = 0; i < s; i++) {
         x[i] = l_vec[i] / l_mat[i * s + i];
     }
