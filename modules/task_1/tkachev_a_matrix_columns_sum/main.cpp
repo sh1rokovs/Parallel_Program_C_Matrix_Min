@@ -156,7 +156,6 @@ TEST(Tkachev_Task1_MatrixColsSum, MatrixSize_41_41) {
 
     const int count_rows = 41;
     const int count_columns = 41;
-
     std::vector<int> test_matrix(count_columns * count_rows);
 
     if (rank == 0) {
