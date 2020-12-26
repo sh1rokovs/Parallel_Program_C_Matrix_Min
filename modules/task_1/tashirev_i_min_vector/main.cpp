@@ -5,25 +5,17 @@
 #include<vector>
 #include"./vector_min.h"
 
-using namespace std;
-
-    TEST(Parralel_MPI, Min_100) {
+    TEST(Parralel_MPI, Min_200) {
         int ProcRank;
         MPI_Comm_rank(MPI_COMM_WORLD, &ProcRank);
-        const int size = 100;
+        const int size = 200;
         std::vector<int> vec(size);
         if (ProcRank == 0) {
             vec = getRandVector(size);
         }
-        double start = MPI_Wtime();
         int parallel_min = getVectorMinValueParallel(vec, size);
-        double end = MPI_Wtime();
         if (ProcRank == 0) {
-            cout << end - start << endl;
-            start = MPI_Wtime();
             int min = getVectorMinValue(vec);
-            end = MPI_Wtime();
-            cout << end - start << endl;
             ASSERT_EQ(min, parallel_min);
         }
     }
