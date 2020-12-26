@@ -30,9 +30,9 @@ TEST(Parallel_Operations_MPI, Test_Trans0to1) {
 }
 TEST(Parallel_Operations_MPI, Test_Trans0toRand) {
     MPI_Comm comm;
-    int rank,size;
-    int proc1=0;
-    int proc2=0;
+    int rank, size;
+    int proc1 = 0;
+    int proc2 = 0;
     int in = 222;
     int out;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
