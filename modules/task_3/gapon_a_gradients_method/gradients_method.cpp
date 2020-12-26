@@ -169,19 +169,22 @@ std::vector<double> gradients_method_parallel(const std::vector<double>& A, cons
     }
 
     std::vector<double> localA(rows_count[rank]);
-    std::vector<double> localb(send_count[rank]), localB(b);
+    std::vector<double> localb(send_count[rank]), localB(b), res(send_count[rank]);
 
     MPI_Scatterv(A.data(), rows_count.data(), displaces_matr.data(), MPI_DOUBLE,
         localA.data(), rows_count[rank], MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Scatterv(b.data(), send_count.data(), displaces.data(), MPI_DOUBLE,
         localb.data(), send_count[rank], MPI_DOUBLE, 0, MPI_COMM_WORLD);
-    if (rank != 0)
+    if (rank != 0) {
         localB.resize(matr_size);
+    }
     MPI_Bcast(localB.data(), matr_size, MPI_INT, 0, MPI_COMM_WORLD);
 
-
-    auto res = gradients_method(A, localB);
-
+    if (rank == 0) {
+        res = gradients_method(A, localB);
+    } else {
+        res = gradients_method(localA, localb);
+    }
     std::vector<double> result;
 
     if (rank == 0)

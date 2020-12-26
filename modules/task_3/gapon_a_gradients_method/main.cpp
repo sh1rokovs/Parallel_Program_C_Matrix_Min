@@ -46,7 +46,7 @@ TEST(Parallel_MPI, Test_Matr_5x5) {
     int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<double> A = { 1, 2, 3, 2, 6, 8, 3, 8, 12 }, b = { 8, 12, 16 };
+    std::vector<double> A, b;
     const int N = 5;
 
     if (rank == 0) {
