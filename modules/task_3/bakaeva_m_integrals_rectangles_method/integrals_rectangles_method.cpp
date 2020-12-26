@@ -56,7 +56,7 @@ double getParallelIntegrals(const int n, vector<pair<double, double> > a_b, doub
     int countIntegrals = static_cast<int>(a_b.size());
     vector<double> h(n);
     vector<pair<double, double>> ab(countIntegrals);
-    size_t countElements;  // Количество всех одночленов
+    unsigned int countElements;  // Количество всех одночленов
 
     // Находим шаги разбиения для каждого отрезка [a,b]
     if (rank == 0) {

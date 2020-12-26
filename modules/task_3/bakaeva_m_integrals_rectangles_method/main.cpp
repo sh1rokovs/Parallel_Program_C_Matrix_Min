@@ -49,7 +49,7 @@ TEST(IntegralsRectanglesMethod, DISABLED_time_test) {
 
     vector<pair<double, double>> a_b(3);
     a_b = {{0, 2}, {0, 1}, {0, 3.14}};
-    int n = 2001;
+    int n = 1500;
     double resLinear;
 
     if (rank == 0) {
