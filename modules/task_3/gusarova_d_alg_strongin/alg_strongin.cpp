@@ -1,4 +1,4 @@
-﻿// Copyright 2020 Gusarova Daria
+﻿  // Copyright 2020 Gusarova Daria
 #include <mpi.h>
 #include <vector>
 #include <ctime>
@@ -8,13 +8,13 @@
 #include "../../../modules/task_3/gusarova_d_alg_strongin/alg_strongin.h"
 
 coords SequentalStrongin(const std::function<double(double)>& func, double a, double b) {
-    std::vector<coords> v;    
+    std::vector<coords> v;
     v.push_back(coords(a, func(a)));
     v.push_back(coords(b, func(b)));
     double M = 0;
     double eps = 0.0001;
     double r = 2.0;
-    size_t k = 2;  
+    size_t k = 2;
     size_t t = 0;
     for (; (v[t + 1].first - v[t].first) > eps; ++k) {
         for (size_t i = 0; i < (k - 1u); ++i) {
@@ -26,11 +26,15 @@ coords SequentalStrongin(const std::function<double(double)>& func, double a, do
         if (M != 0.0) {
             m = r * M;
         }
-        t = 0;  
-        double R = m * (v[1].first - v[0].first) + (v[1].second - v[0].second) *(v[1].second - v[0].second) / (m * (v[1].first - v[0].first)) -
-        2 * (v[1].second + v[0].second);
+        t = 0;
+        double R = m * (v[1].first - v[0].first) + (v[1].second - 
+        v[0].second) *(v[1].second - v[0].second) / (m * 
+        (v[1].first - v[0].first)) - 2 * (v[1].second + v[0].second);
         for (size_t i = 1; i < (k - 1u); ++i) {
-            double R_tmp = m * (v[i + 1u].first - v[i].first) + (v[i + 1u].second - v[i].second) *(v[i + 1u].second - v[i].second) / (m * (v[i + 1u].first - v[i].first)) -2 * (v[i + 1u].second + v[i].second);
+            double R_tmp = m * (v[i + 1u].first - v[i].first) + 
+            (v[i + 1u].second - v[i].second) *(v[i + 1u].second - 
+            v[i].second) / (m * (v[i + 1u].first - v[i].first)) -
+            2 * (v[i + 1u].second + v[i].second);
             if (R_tmp > R) {
                 t = i;
                 R = R_tmp;
@@ -52,7 +56,7 @@ coords ParallelStrongin(const std::function<double(double)>& func, double a, dou
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     if (rank == 0) {
-        std::vector<coords> v; 
+        std::vector<coords> v;
         v.push_back(coords(a, func(a)));
         v.push_back(coords(b, func(b)));
         double M = 0.0;
@@ -61,20 +65,20 @@ coords ParallelStrongin(const std::function<double(double)>& func, double a, dou
         for (; true; k = static_cast<int>(v.size())) {
             int tj_size = (static_cast<int>(tj_v.size()) < size) ? static_cast<int>(tj_v.size()) : size;
             for (int i = 0; i < (k - 1); ++i) {
-                if ((v[i + 1].first - v[i].first) < eps) {  
+                if ((v[i + 1].first - v[i].first) < eps) {
                     int stop = 1;
                     for (int i = 1; i < size; ++i) {  
                         MPI_Send(&stop, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
                     }
                     coords min = v[0];
-                    for (int j = 1; j < k; ++j) {  
+                    for (int j = 1; j < k; ++j) {
                         if (v[j].second < min.second)
                             min = v[j];
                     }
                     return min;
                 }
             }
-            for (int i = 0; i < (k - 1); ++i) {  
+            for (int i = 0; i < (k - 1); ++i) {
                 double M_tmp = std::abs((v[i + 1].second - v[i].second) / (v[i + 1].first - v[i].first));
                 if (M_tmp > M)
                     M = M_tmp;
@@ -85,21 +89,26 @@ coords ParallelStrongin(const std::function<double(double)>& func, double a, dou
             tj_v.clear();
             double R;
             for (int i = 0; i < (k - 1); ++i) {
-                R = m * (v[i + 1].first - v[i].first) + (v[i + 1].second - v[i].second) *(v[i + 1].second - v[i].second) / (m * (v[i + 1].first - v[i].first)) -2 * (v[i + 1].second + v[i].second);tj_v.push_back(coords(i, R));
+                R = m * (v[i + 1].first - v[i].first) + (v[i + 1].second
+                - v[i].second) *(v[i + 1].second - v[i].second) / 
+                (m * (v[i + 1].first - v[i].first)) -2 * (v[i + 1].second +
+                v[i].second);tj_v.push_back(coords(i, R));
             }
             tj_size = (static_cast<int>(tj_v.size()) < size) ? static_cast<int>(tj_v.size()) : size;
-            for (int j = 0; j < tj_size; ++j) {  
+            for (int j = 0; j < tj_size; ++j) {
                 for (int l = j + 1; l < static_cast<int>(tj_v.size()); ++l) {
                     if (tj_v[l].second > tj_v[j].second) {
                          std::swap(tj_v[l], tj_v[j]);
                     }
                 }
             }
-            double x_t0 = (v[tj_v[0].first + 1].first + v[tj_v[0].first].first) / 2 -(v[tj_v[0].first + 1].second - v[tj_v[0].first].second) / (2 * m);
+            double x_t0 = (v[tj_v[0].first + 1].first + v[tj_v[0].first].first) 
+            / 2 -(v[tj_v[0].first + 1].second - v[tj_v[0].first].second) / (2 * m);
             std::vector<coords> tmp_v(tj_size);
             tmp_v[0] = coords(x_t0, 0.0);
             for (int i = 1; i < tj_size; ++i) {
-                double x_t = (v[tj_v[i].first + 1].first + v[tj_v[i].first].first) / 2 -(v[tj_v[i].first + 1].second - v[tj_v[i].first].second) / (2 * m);
+                double x_t = (v[tj_v[i].first + 1].first + v[tj_v[i].first].first) 
+                / 2 -(v[tj_v[i].first + 1].second - v[tj_v[i].first].second) / (2 * m);
                 int stop = 0;
                 MPI_Send(&stop, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
                 MPI_Send(&x_t, 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD);
