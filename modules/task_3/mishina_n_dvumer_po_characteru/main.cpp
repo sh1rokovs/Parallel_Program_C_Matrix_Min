@@ -14,7 +14,7 @@ TEST(Global_Optimization_MPI, Test_1) {
     xyzStruct result = twoPar(-4, 4, -4, 4, ptr);
     if (rank == 0) {
         xyzStruct just_result = twoParSequential(-4, 4, -4, 4, ptr);
-        std::cout << "õ= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
+        std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, just_result, 0.1));
     }
 }
@@ -25,7 +25,7 @@ TEST(Global_Optimization_MPI, Test_2) {
     xyzStruct result = twoPar(-0.9, 1, -1, 1, ptr);
     if (rank == 0) {
         xyzStruct must_be_result = {0, 0, 4};
-            std::cout << "õ= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
+            std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, must_be_result, 0.1));
     }
 }
@@ -36,7 +36,7 @@ TEST(Global_Optimization_MPI, Test_3) {
     xyzStruct result = twoPar(0, 2, 0.3, 1, ptr);
     if (rank == 0) {
         xyzStruct must_be_result = {1, 0.5, 4};
-            std::cout << "õ= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
+            std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, must_be_result, 0.1));
     }
 }
@@ -47,7 +47,7 @@ TEST(Global_Optimization_MPI, Test_4) {
     xyzStruct result = twoPar(0.1, 5, -5, 5, ptr);
     if (rank == 0) {
         xyzStruct must_be_result = {5, -5, -136.18};
-        std::cout << "õ= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
+        std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, must_be_result, 0.1));
     }
 }
@@ -58,7 +58,7 @@ TEST(Global_Optimization_MPI, Test_5) {
     xyzStruct result = twoPar(1, 3, 1, 2, ptr);
     if (rank == 0) {
         xyzStruct must_be_result = {2, 1.25, -1.5};
-        std::cout << "õ= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
+        std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, must_be_result, 0.1));
     }
 }
