@@ -14,6 +14,7 @@ TEST(Global_Optimization_MPI, Test_1) {
     xyzStruct result = twoPar(-4, 4, -4, 4, ptr);
     if (rank == 0) {
         xyzStruct just_result = twoParSequential(-4, 4, -4, 4, ptr);
+        std::cout << "x= " << result.x << "y= " << result.y << "z= " << result.z << std::endl;
         ASSERT_TRUE(comparingResults(result, just_result, 0.1));
     }
 }
