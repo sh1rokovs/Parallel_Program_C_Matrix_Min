@@ -11,12 +11,12 @@ TEST(Parallel_Operations_MPI, Test1) {
     int a, b, N;
     a = 1;
     b = 3;
-    N = 10000;
+    N = 20000;
     double dop = static_cast<double>(b - a) / N;
     double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
         double easy_result = EasyFunc(N, a, b, 0);
-        ASSERT_NEAR(parallel_result, easy_result, 3);
+        ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
 
@@ -31,7 +31,7 @@ TEST(Parallel_Operations_MPI, Test2) {
     double parallel_result = ParallelFunc(N, a, b, 1) * dop;
     if (rank == 0) {
         double easy_result = EasyFunc(N, a, b, 1);
-        ASSERT_NEAR(parallel_result, easy_result, 3);
+        ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
 
@@ -41,12 +41,12 @@ TEST(Parallel_Operations_MPI, Test3) {
     int a, b, N;
     a = -3;
     b = -1;
-    N = 10000;
+    N = 20000;
     double dop = static_cast<double>(b - a) / N;
     double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
         double easy_result = EasyFunc(N, a, b, 0);
-        ASSERT_NEAR(parallel_result, easy_result, 3);
+        ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
 
@@ -56,12 +56,12 @@ TEST(Parallel_Operations_MPI, Test4) {
     int a, b, N;
     a = 1;
     b = 3;
-    N = 10000;
+    N = 20000;
     double dop = static_cast<double>(b - a) / N;
     double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
         double easy_result = EasyFunc(N, a, b, 0);
-        ASSERT_NEAR(parallel_result, easy_result, 3);
+        ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
 
@@ -71,12 +71,12 @@ TEST(Parallel_Operations_MPI, Test5) {
     int a, b, N;
     a = -1;
     b = 2;
-    N = 10000;
+    N = 20000;
     double dop = static_cast<double>(b - a) / N;
     double parallel_result = ParallelFunc(N, a, b, 0) * dop;
     if (rank == 0) {
         double easy_result = EasyFunc(N, a, b, 0);
-        ASSERT_NEAR(parallel_result, easy_result, 3);
+        ASSERT_NEAR(parallel_result, easy_result, 10);
     }
 }
 
