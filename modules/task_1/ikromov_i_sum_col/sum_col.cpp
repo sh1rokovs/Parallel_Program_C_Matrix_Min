@@ -1,4 +1,5 @@
 // Copyright 2020 Ikromov Inom
+
 #include <mpi.h>
 #include <vector>
 #include <algorithm>
