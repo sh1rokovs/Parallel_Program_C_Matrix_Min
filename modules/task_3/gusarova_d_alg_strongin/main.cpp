@@ -18,11 +18,7 @@ TEST(Parallel_Operations_MPI, Test_1) {
         double t1 = MPI_Wtime();
         coords res = SequentalStrongin(func, a, b);
         double t2 = MPI_Wtime();
-        double t1_p = MPI_Wtime();
-        coords res_p = SequentalStrongin(func, a, b);
-        double t2_p = MPI_Wtime();
         std::cout << "Sequential Time :" << t2 - t1 << std::endl;
-        std::cout << "Parallel Time :" << t2_p - t1_p << std::endl;
         ASSERT_EQ(true, res.first < 0.1);
     }
 }
