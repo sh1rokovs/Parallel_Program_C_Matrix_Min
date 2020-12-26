@@ -49,10 +49,10 @@ TEST(word_count, correct_count_word_paralell) {
     int rank = 0;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    std::string s = "My mum enjoys reading and my dad enjoys playing chess with my brother Ken";
+    std::string s = "I like eat chocolate";
     int result = parallel_count_words(s, 0);
     if (0 == rank) {
-        ASSERT_EQ(14, result);
+        ASSERT_EQ(4, result);
     }
 }
 
