@@ -121,8 +121,7 @@ std::vector<double> MPI_Simple_iterations_Method(std::vector<double> mat,
             for (int j = 0; j < s; j++) {
                 if (i == j) {
                     continue;
-                }
-                else {
+                } else {
                     x[i] -= l_mat[t] / mat[t] * tmp[j];
                 }
             }
