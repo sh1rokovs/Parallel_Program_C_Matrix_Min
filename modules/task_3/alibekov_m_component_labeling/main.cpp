@@ -262,12 +262,12 @@ TEST(Component_Labeling, my_image_18x22_sequential) {
 }
 
 
-TEST(Component_Labeling, random_image_1080x1920) {
+TEST(Component_Labeling, random_image_108x192) {
     int proc_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &proc_rank);
     double start_time_par, end_time_par, start_time_seq, end_time_seq;
 
-    int height = 1080, width = 1920;
+    int height = 108, width = 192;
     std::vector<int> generated_image(width * height);
     std::pair<std::vector<int>, int> result_seq;
 
