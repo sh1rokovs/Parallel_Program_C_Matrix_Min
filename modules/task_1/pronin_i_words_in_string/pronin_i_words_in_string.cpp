@@ -2,6 +2,7 @@
 #include <mpi.h>
 #include <cstdlib>
 #include <ctime>
+#include <random>
 #include <vector>
 #include <string>
 #include <cstring>
@@ -9,12 +10,13 @@
 std::string RandomString(int n) {
     if (n < 0)
         throw "Wrong size";
-    srand((unsigned)time(NULL));
+    std::mt19937 gen;
+    gen.seed(time(0));
     const char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .!,?";
     const int strLen = strlen(s);
     std::string ss = "";
     for (int i = 0; i < n; i++)
-        ss += s[rand() % strLen];
+        ss += s[gen() % strLen];
     return ss;
 }
 int SequentialOperations(std::string a) {

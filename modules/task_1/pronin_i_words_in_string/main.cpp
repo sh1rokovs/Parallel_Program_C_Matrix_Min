@@ -5,7 +5,7 @@
 #include <string>
 #include "./pronin_i_words_in_string.h"
 
-TEST(Parallel_Operations_MPI, Line_Size_101) {
+TEST(Parallel_Operations_MPI, Line_Size_100) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     const int size = 101;
