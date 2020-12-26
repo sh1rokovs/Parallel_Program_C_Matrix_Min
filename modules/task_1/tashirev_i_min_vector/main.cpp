@@ -4,12 +4,13 @@
 #include<gtest/gtest.h>
 #include<vector>
 #include"./vector_min.h"
+
 using namespace std;
 
-    TEST(Parralel_MPI, Min_1000) {
+    TEST(Parralel_MPI, Min_100) {
         int ProcRank;
         MPI_Comm_rank(MPI_COMM_WORLD, &ProcRank);
-        const int size = 1000;
+        const int size = 100;
         std::vector<int> vec(size);
         if (ProcRank == 0) {
             vec = getRandVector(size);
@@ -26,10 +27,10 @@ using namespace std;
             ASSERT_EQ(min, parallel_min);
         }
     }
-    TEST(Parralel_MPI, Min_100) {
+    TEST(Parralel_MPI, Min_10) {
         int ProcRank;
         MPI_Comm_rank(MPI_COMM_WORLD, &ProcRank);
-        const int size = 100;
+        const int size = 10;
         std::vector<int> vec(size);
         if (ProcRank == 0) {
             vec = getRandVector(size);
