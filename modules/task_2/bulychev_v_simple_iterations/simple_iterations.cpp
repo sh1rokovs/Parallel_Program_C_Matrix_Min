@@ -123,14 +123,14 @@ std::vector<double> MPI_Simple_iterations_Method(std::vector<double> mat,
                     continue;
                 }
                 else {
-                    x[i] -= mat[t] / mat[t] * x[j];
+                    x[i] -= l_mat[t] / mat[t] * tmp[j];
                 }
             }
         }
 
         int local_flag = 1;
         for (int i = 0; i < s - 1; i++) {
-            if (std::abs(x[i] - x[i]) > eps) {
+            if (std::abs(x[i] - tmp[i]) > eps) {
                 local_flag = 0;
                 break;
             }
