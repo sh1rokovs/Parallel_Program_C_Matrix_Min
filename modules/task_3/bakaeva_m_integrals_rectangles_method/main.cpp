@@ -41,27 +41,32 @@
         return x * x * z * sin(x * y * z);
     }
 
-TEST(IntegralsRectanglesMethod, DISABLED_timeTest) {
+TEST(IntegralsRectanglesMethod, DISABLED_time_test) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     double t1, t2;
 
-    vector<pair<double, double>> a_b(2);
-    a_b = {{1, 5}, {0, 3}};
+    vector<pair<double, double>> a_b(3);
+    a_b = {{0, 2}, {0, 1}, {0, 3.14}};
+    int n = 1500;
+    double resLinear;
+
+    if (rank == 0) {
+        t1 = MPI_Wtime();
+        resLinear = getSequentialIntegrals(n, a_b, f5);
+        t2 = MPI_Wtime();
+        std::cout << "Linear time: " << t2 - t1 << std::endl;
+    }
 
     t1 = MPI_Wtime();
-    double resParallel = getParallelIntegrals(100, a_b, f1);
+    double resParallel = getParallelIntegrals(n, a_b, f5);
     t2 = MPI_Wtime();
 
     if (rank == 0)
     std::cout << "Parallel time: " <<t2 - t1 << std::endl;
 
     if (rank == 0) {
-        t1 = MPI_Wtime();
-        double resLinear = getSequentialIntegrals(100, a_b, f1);
-        t2 = MPI_Wtime();
-        std::cout << "Linear time: " << t2 - t1 << std::endl;
         ASSERT_NEAR(resLinear, resParallel, 0.001);
     }
 }
