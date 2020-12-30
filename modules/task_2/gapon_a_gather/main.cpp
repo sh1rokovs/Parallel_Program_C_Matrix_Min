@@ -6,87 +6,104 @@
 #include <vector>
 #include "./gather.h"
 
-TEST(Parallel_Lab2_MPI, Test_int) {
-    int rank, size;
-    int root = 0;
-    int num = 3;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<int> vec = getRandomArrInt(num, rank);
-    std::vector<int> rbuf(size * num);
-    std::vector<int> mybuf(size * num);
-    Gather(vec.data(), num, MPI_INT,
-        mybuf.data(), num, MPI_INT, root, MPI_COMM_WORLD);
-    MPI_Gather(vec.data(), num, MPI_INT,
-        rbuf.data(), num, MPI_INT, root, MPI_COMM_WORLD);
-    if (rank == root) {
-        ASSERT_EQ(mybuf, rbuf);
-    }
-}
 
-TEST(Parallel_Lab2_MPI, Test_float) {
+TEST(Lab2, Test_Float) {
     int rank, size;
-    int root = 0;
-    int num = 5;
+    int num = 800;
+    int root = 1;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<float> vec = getRandomArrFloat(num, rank);
+    std::vector<float> vec = ArrFloat(num);
     std::vector<float> rbuf(size * num);
     std::vector<float> mybuf(size * num);
-    Gather(vec.data(), num, MPI_FLOAT,
-        mybuf.data(), num, MPI_FLOAT, root, MPI_COMM_WORLD);
-    MPI_Gather(vec.data(), num, MPI_FLOAT,
-        rbuf.data(), num, MPI_FLOAT, root, MPI_COMM_WORLD);
+    Gather(vec.data(), num, MPI_FLOAT, mybuf.data(),
+        num, MPI_FLOAT, root, MPI_COMM_WORLD);
+    MPI_Gather(vec.data(), num, MPI_FLOAT, rbuf.data(),
+        num, MPI_FLOAT, root, MPI_COMM_WORLD);
     if (rank == root) {
         ASSERT_EQ(mybuf, rbuf);
     }
 }
 
-TEST(Parallel_Lab2_MPI, Test_double) {
+TEST(Lab2, Test_Double) {
     int rank, size;
     int root = 0;
-    int num = 3;
+    int num = 800;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<double> vec = getRandomArrDouble(num, rank);
+    std::vector<double> vec = ArrDouble(num);
     std::vector<double> rbuf(size* num);
     std::vector<double> mybuf(size* num);
-    Gather(vec.data(), num, MPI_DOUBLE,
-        mybuf.data(), num, MPI_DOUBLE, root, MPI_COMM_WORLD);
-    MPI_Gather(vec.data(), num, MPI_DOUBLE,
-        rbuf.data(), num, MPI_DOUBLE, root, MPI_COMM_WORLD);
+    Gather(vec.data(), num, MPI_DOUBLE, mybuf.data(),
+        num, MPI_DOUBLE, root, MPI_COMM_WORLD);
+    MPI_Gather(vec.data(), num, MPI_DOUBLE, rbuf.data(),
+        num, MPI_DOUBLE, root, MPI_COMM_WORLD);
     if (rank == root) {
         ASSERT_EQ(mybuf, rbuf);
     }
 }
 
-TEST(Parallel_Operations_MPI, Test_er_root) {
+
+TEST(Lab2, Test_int_time) {
     int rank, size;
-    int root = -5;
-    int num = 3;
+    int root = 0;
+    int num = 1000;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<int> vec = getRandomArrInt(num, rank);
+    std::vector<int> vec = ArrInt(num);
+    std::vector<int> rbuf(size * num);
     std::vector<int> mybuf(size * num);
+    // auto start = std::chrono::steady_clock::now();
+    Gather(vec.data(), num, MPI_INT, mybuf.data(),
+        num, MPI_INT, root, MPI_COMM_WORLD);
+    // auto end = std::chrono::steady_clock::now();
+    // std::chrono::duration<double> my_timer = end - start;
+    // auto start_mpi = std::chrono::steady_clock::now();
+    MPI_Gather(vec.data(), num, MPI_INT, rbuf.data(),
+        num, MPI_INT, root, MPI_COMM_WORLD);
+    // auto end_mpi = std::chrono::steady_clock::now();
+    // std::chrono::duration<double> mpi_timer = end_mpi - start_mpi;
     if (rank == root) {
-        ASSERT_EQ(Gather(vec.data(), num, MPI_INT,
-            mybuf.data(), num, MPI_INT, root, MPI_COMM_WORLD), MPI_ERR_ROOT);
+        ASSERT_EQ(mybuf, rbuf);
+    }
+    if (rank == root) {
+        // std::cout << "MPI guther runtime: "
+        // << mpi_timer.count() << std::endl;
+        // std::cout << "MPI guther runtime: "
+        // << my_timer.count() << std::endl;
     }
 }
 
-TEST(Parallel_Operations_MPI, Test_er_count) {
+TEST(Lab2, Test_double_time) {
     int rank, size;
     int root = 0;
-    int num = 3;
+    int num = 1000;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    std::vector<int> vec = getRandomArrInt(num, rank);
-    std::vector<int> mybuf(size * num);
+    std::vector<double> vec = ArrDouble(num);
+    std::vector<double> rbuf(size * num);
+    std::vector<double> mybuf(size * num);
+    // auto start_2 = std::chrono::steady_clock::now();
+    Gather(vec.data(), num, MPI_DOUBLE, mybuf.data(),
+        num, MPI_DOUBLE, root, MPI_COMM_WORLD);
+    // auto end_2 = std::chrono::steady_clock::now();
+    // std::chrono::duration<double> my_timer = end_2 - start_2;
+    // auto start_mpi_2 = std::chrono::steady_clock::now();
+    MPI_Gather(vec.data(), num, MPI_DOUBLE, rbuf.data(),
+        num, MPI_DOUBLE, root, MPI_COMM_WORLD);
+    // auto end_mpi_2 = std::chrono::steady_clock::now();
+    // std::chrono::duration<double> mpi_timer = end_mpi_2 - start_mpi_2;
     if (rank == root) {
-        ASSERT_EQ(Gather(vec.data(), 2, MPI_INT,
-            mybuf.data(), 5, MPI_INT, root, MPI_COMM_WORLD), MPI_ERR_COUNT);
+        ASSERT_EQ(mybuf, rbuf);
+    }
+    if (rank == root) {
+        // std::cout << "MPI guther runtime: "
+        // << mpi_timer.count() << std::endl;
+        // std::cout << "MPI guther runtime: "
+        // << my_timer.count() << std::endl;
     }
 }
+
 
 int main(int argc, char* argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
