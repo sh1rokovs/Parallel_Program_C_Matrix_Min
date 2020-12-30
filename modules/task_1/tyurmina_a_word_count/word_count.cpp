@@ -69,7 +69,9 @@ int parallel_count_words(std::string s, int z) {
     int a;
 
     if (rank == 0) {
-        s1 = s.substr(0, part2 + part);
+        for (int i = 0; i <= part2 + part; i++) {
+            s1 += s[i];
+        }
     } else {
         MPI_Status status;
         MPI_Recv(&a, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
