@@ -15,7 +15,6 @@ std::vector<int> compareResults(std::vector<int> list) {
             int tmp = list[i - j + 1];
             list[i - j + 1] = list[i - j];
             list[i - j] = tmp;
-
             j++;
         }
     }
@@ -31,7 +30,6 @@ std::vector<int> shell_sort(std::vector<int> list) {
     int procRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &procRank);
     MPI_Status status;
-
 
     int len = list.size();
     int part = len;
